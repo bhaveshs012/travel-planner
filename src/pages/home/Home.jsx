@@ -4,10 +4,7 @@ import { Hero, Features, Testimonials } from "./components";
 
 function Home() {
   return (
-    <div
-      className="overflow-y-auto"
-      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-    >
+    <div>
       <Header />
       <Hero />
       <Features />

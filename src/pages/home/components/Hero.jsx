@@ -1,4 +1,5 @@
 import React from "react";
+import coreConstants from "../../../constants/core";
 
 function Hero() {
   return (
@@ -6,11 +7,11 @@ function Hero() {
       <div className="container mx-auto px-4 py-8 md:py-8 flex flex-col md:flex-row items-center justify-between">
         <div className="md:w-1/2 md:pr-8">
           <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-4">
-            Plan Your Next Adventure with TravelLog
+            Plan Your Next Adventure with {coreConstants.AppName}
           </h1>
           <p className="text-lg text-gray-600 mb-6">
-            TravelLog helps you organize your travel plans and share them with
-            friends. Sign up now and start exploring!
+            {coreConstants.AppName} helps you organize your travel plans and
+            share them with friends. Sign up now and start exploring!
           </p>
           <a
             href="#"

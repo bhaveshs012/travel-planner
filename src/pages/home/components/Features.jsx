@@ -1,4 +1,5 @@
 import React from "react";
+import coreConstants from "../../../constants/core";
 
 function Features() {
   return (
@@ -8,7 +9,7 @@ function Features() {
           <div className="text-center mb-4">
             <h2 className="text-3xl font-extrabold text-gray-900">Features</h2>
             <p className="mt-4 text-lg text-gray-600">
-              Discover what Wanderlog has to offer
+              Discover what {coreConstants.AppName} has to offer
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
