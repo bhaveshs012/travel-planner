@@ -6,8 +6,13 @@
 body {
   font-family: "Montserrat", sans-serif;
   overflow-y: scroll;
+  height: 100vh;
 }
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+html {
+  height: 100vh;
 }
