@@ -4,7 +4,7 @@ function Contact() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white max-w-md w-full p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-black mb-6">
+        <h2 className="text-2xl font-bold text-center text-black mb-6">
           Share your Feedback
         </h2>
         <form>

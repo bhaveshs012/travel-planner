@@ -3,7 +3,7 @@ import coreConstants from "../../constants/core";
 
 function Footer() {
   return (
-    <footer className="bg-black text-white py-4">
+    <footer className="bg-black text-white py-4 bottom-0">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <p className="text-sm">
           © {new Date().getFullYear()} {coreConstants.AppName}. All rights
