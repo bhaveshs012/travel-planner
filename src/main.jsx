@@ -2,7 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { About, Contact, Features, Home, Login, Signup } from "./pages/index";
+import {
+  About,
+  Contact,
+  Features,
+  Home,
+  Login,
+  Profile,
+  Signup,
+} from "./pages/index";
 import Layout from "./Layout";
 
 const router = createBrowserRouter([
@@ -35,6 +43,10 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
     ],
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 
