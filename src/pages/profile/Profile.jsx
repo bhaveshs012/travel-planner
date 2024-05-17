@@ -9,8 +9,8 @@ function Profile() {
         <ProfileHeader />
       </div>
       <div className="flex h-5/6 gap-3 mt-4">
-        <div className="flex-1 bg-green-300 text-center p-4">
-          <PhotoGridView photos={[]} />
+        <div className="flex-1 bg-blue-50 text-center p-4">
+          <PhotoGridView />
         </div>
         <div className="flex-1 bg-green-300 text-center p-4">Videos</div>
       </div>
