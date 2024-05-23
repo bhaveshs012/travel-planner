@@ -2,7 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { About, Contact, Features, Home, Login, Signup } from "./pages/index";
+import {
+  About,
+  Contact,
+  Features,
+  Home,
+  Login,
+  Profile,
+  Signup,
+} from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
 
@@ -38,8 +46,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
-    element: <DashBoardLayout />,
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 
