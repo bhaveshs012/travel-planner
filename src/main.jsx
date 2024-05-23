@@ -4,6 +4,8 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { About, Contact, Features, Home, Login, Signup } from "./pages/index";
 import Layout from "./Layout";
+import Card from "./components/Cards/card";
+import MainCard from "./components/TripCardMain/MainCard";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,16 @@ const router = createBrowserRouter([
         path: "signup",
         element: <Signup />,
       },
+      {
+        path: "Cards",
+        element: <Card />,
+      },
+      {
+        path: "TripCardMain",
+        element: <MainCard />,
+      },
+      
+      
     ],
   },
 ]);
