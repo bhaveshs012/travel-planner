@@ -61,6 +61,10 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
