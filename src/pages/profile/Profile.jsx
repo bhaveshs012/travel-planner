@@ -3,16 +3,18 @@ import { ProfileHeader, PhotoGridView, VideoGridView } from "./components";
 
 function Profile() {
   return (
-    <div className="h-screen mx-auto py-4 px-4 justify-start">
-      <div className="h-3/5">
+    <div className="h-screen flex w-screen">
+      <div className="w-1/4 p-4 flex justify-center">
+        {/* First Column */}
         <ProfileHeader />
       </div>
-      <div className="flex h-5/6 gap-3 mt-4">
-        <div className="flex-1 bg-blue-50 text-center p-4 mb-4 rounded-lg">
-          <PhotoGridView />
+      {/* Second Column */}
+      <div className="w-3/4 p-4 overflow-scroll">
+        <div className="p-4 mb-10 bg-gray-50  rounded-lg shadow-md">
+          <PhotoGridView title={"Latest Trip"} />
         </div>
-        <div className="flex-1 bg-blue-50 text-center p-4 mb-4 rounded-lg">
-          <VideoGridView />
+        <div className="p-4 mb-4 bg-gray-50  rounded-lg shadow-md">
+          <VideoGridView title={"Videos"} />
         </div>
       </div>
     </div>
