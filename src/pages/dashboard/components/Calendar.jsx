@@ -8,7 +8,7 @@ const Calendar = () => {
   const [endDate, setEndDate] = useState(null);
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="m-4">
       <DatePicker
         selected={startDate}
         onChange={(dates) => {

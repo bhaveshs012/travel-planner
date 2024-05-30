@@ -13,7 +13,7 @@ import {
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
-import Card from "./components/Cards/card";
+import Card from "./components/Cards/Card";
 import MainCard from "./components/TripCardMain/MainCard";
 
 const router = createBrowserRouter([
@@ -60,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout />,
   },
 ]);
 
