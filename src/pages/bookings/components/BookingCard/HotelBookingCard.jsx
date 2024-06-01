@@ -1,5 +1,5 @@
 import React from "react";
-import { FaLocationDot, FaHotel, FaClock } from "react-icons/fa6";
+import { FaLocationDot, FaHotel, FaCalendarDays } from "react-icons/fa6";
 
 function HotelBookingCard({ hotelName, location, checkInDate, checkoutDate }) {
   return (
@@ -16,12 +16,16 @@ function HotelBookingCard({ hotelName, location, checkInDate, checkoutDate }) {
           </div>
           <div className="flex gap-4">
             <div className="flex gap-1 items-center text-sm text-gray-600">
-              <FaClock />
-              <p>{checkInDate}</p>
+              <FaCalendarDays />
+              <p>
+                <span className="font-semibold">Check In:</span> {checkInDate}
+              </p>
             </div>
             <div className="flex gap-1 items-center text-sm text-gray-600">
-              <FaClock />
-              <p>{checkoutDate}</p>
+              <FaCalendarDays />
+              <p>
+                <span className="font-semibold">Check Out:</span> {checkoutDate}
+              </p>
             </div>
           </div>
         </div>

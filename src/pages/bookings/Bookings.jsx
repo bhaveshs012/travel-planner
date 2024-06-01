@@ -1,27 +1,12 @@
 import React from "react";
-import { UpcomingTrips, BookingCard, HotelBookingCard } from "./components";
+import {
+  UpcomingTrips,
+  HotelBookingCard,
+  TravelBookingCard,
+} from "./components";
+import bookings from "./data/bookings";
 
 function Bookings() {
-  const bookings = [
-    {
-      type: "flight",
-      title: "New York to London",
-      subtitle: "2024-06-01",
-      icon: "faPlane",
-    },
-    {
-      type: "train",
-      title: "Paris to Berlin",
-      subtitle: "2024-07-10",
-      icon: "faTrain",
-    },
-    {
-      type: "hotel",
-      title: "Hotel California",
-      subtitle: "Check-in: 2024-08-15, Check-out: 2024-08-20",
-      icon: "faHotel",
-    },
-  ];
   return (
     <div className="w-screen p-4">
       <UpcomingTrips />
@@ -33,12 +18,15 @@ function Bookings() {
             View More
           </button>
         </div>
-        <HotelBookingCard
-          hotelName="Hotel Imperial Blue"
-          location={"7th Street, California, USA"}
-          checkInDate={"25-05-2024"}
-          checkoutDate={"30-5-2024"}
-        />
+        <div className="space-y-4 ">
+          {bookings.map((booking, index) =>
+            booking.bookingType === "travel" ? (
+              <TravelBookingCard key={index} {...booking} />
+            ) : (
+              <HotelBookingCard key={index} {...booking} />
+            )
+          )}
+        </div>
       </div>
     </div>
   );
