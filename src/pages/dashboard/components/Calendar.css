@@ -3,7 +3,9 @@
   border-radius: 1.5rem;
   border: none;
   padding: 0.8rem 1rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  font-family: "Poppins";
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .react-datepicker__header {
@@ -48,12 +50,12 @@
 }
 
 .react-datepicker__day:hover {
-  background-color: #F5F8FA;
+  background-color: #f5f8fa;
   color: black;
 }
 
 .react-datepicker__day--outside-month {
-  color: #F5F8FA;
+  color: #f5f8fa;
 }
 
 .react-datepicker__triangle {
