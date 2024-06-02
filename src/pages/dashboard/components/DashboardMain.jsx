@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Topnav from "./Topnav";
 import Calendar from "./Calendar";
 import SearchBar from "../../../components/SearchBar/SearchBar";
 import { MainCard, Card } from "../../../components";
-
+import { SidebarContext } from "../DashBoardLayout";
 const DashboardMain = () => {
+  const { expanded, setExpanded } = useContext(SidebarContext);
   return (
-    <div className="flex flex-col">
-      <div className="grid grid-cols-6">
+    <div className={`flex flex-col relative transition-all ${expanded ? "ml-72" : "ml-20"}`}>
+      <div className={`grid grid-cols-6 `}>
         <div className="col-span-4">
           <SearchBar />
         </div>
