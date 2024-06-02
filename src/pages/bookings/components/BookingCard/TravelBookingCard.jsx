@@ -70,7 +70,7 @@ function TravelBookingCard({
           </div>
         </div>
       </div>
-      <button className="px-4 py-2 bg-black text-white text-sm font-semibold rounded hover:bg-gray-800">
+      <button className="px-4 py-2 bg-black text-white text-sm font-semibold rounded hover:bg-gray-900">
         View PDF
       </button>
     </div>

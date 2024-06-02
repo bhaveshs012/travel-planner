@@ -6,5 +6,6 @@ import About from "./about/About";
 import Features from "./features/Features";
 import Profile from "./profile/Profile";
 import Bookings from "./bookings/Bookings";
+import ExpenseTracker from "./expenseTracker/ExpenseTracker";
 
-export { Home, Login, Signup, Contact, About, Features, Profile, Bookings };
+export { Home, Login, Signup, Contact, About, Features, Profile, Bookings, ExpenseTracker };

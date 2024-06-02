@@ -8,7 +8,7 @@ import bookings from "./data/bookings";
 
 function Bookings() {
   return (
-    <div className="w-screen p-4">
+    <div className="w-screen p-8">
       <UpcomingTrips />
       {/* Recent Bookings */}
       <div className="w-full mx-auto mt-10">
