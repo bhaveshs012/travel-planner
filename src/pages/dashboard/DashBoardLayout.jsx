@@ -1,16 +1,21 @@
-import React from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import React, { createContext, useState } from "react";
 import DashboardMain from "./components/DashboardMain";
+import Sidebar, { SidebarItem } from "../../components/Sidebar/Sidebar";
+
+export const SidebarContext = createContext();
+
 const DashBoardLayout = () => {
+  const [expanded, setExpanded] = useState(true);
+
   return (
-    <div className="grid grid-cols-7 h-full">
-      <div className="col-span-1">
-        <Sidebar />
-      </div>
-      <div className="col-span-6">
+    <SidebarContext.Provider value={{ expanded, setExpanded }}>
+      <div className="flex flex-row">
+        <div>
+          <Sidebar />
+        </div>
         <DashboardMain />
       </div>
-    </div>
+    </SidebarContext.Provider>
   );
 };
 
