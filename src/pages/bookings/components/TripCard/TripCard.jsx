@@ -41,7 +41,9 @@ function TripCard() {
       </div>
       <div className="flex space-x-4 items-center bg-black rounded-bl-lg rounded-br-lg mt-0 p-4 text-white">
         <AvatarRow />
-        <FaPlus className="h-5 w-5" />
+        <button title="Add New Member">
+          <FaPlus className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );
