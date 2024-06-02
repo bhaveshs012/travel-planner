@@ -5,12 +5,10 @@ import {
   TravelBookingCard,
 } from "./components";
 import bookings from "./data/bookings";
-import { SmallFilledButton } from "../../components/Buttons";
 
 function Bookings() {
   return (
-    <div className="w-screen p-4">
-      
+    <div className="w-screen p-8">
       <UpcomingTrips />
       {/* Recent Bookings */}
       <div className="w-full mx-auto mt-10">
