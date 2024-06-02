@@ -1,5 +1,6 @@
 import React from "react";
 import AvatarRow from "./AvatarRow";
+import { FaPlus } from "react-icons/fa6";
 
 function TripCard() {
   return (
@@ -38,8 +39,9 @@ function TripCard() {
           </p>
         </div>
       </div>
-      <div className="bg-black rounded-bl-lg rounded-br-lg mt-0 p-4 text-white">
+      <div className="flex space-x-4 items-center bg-black rounded-bl-lg rounded-br-lg mt-0 p-4 text-white">
         <AvatarRow />
+        <FaPlus className="h-5 w-5" />
       </div>
     </div>
   );
