@@ -4,3 +4,4 @@ import MainCard from "./TripCardMain/MainCard";
 import Card from "./Cards/Card";
 
 export { Header, Footer, MainCard, Card };
+
