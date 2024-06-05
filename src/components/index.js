@@ -1,7 +1,7 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import MainCard from "./TripCardMain/MainCard";
-import Card from "./Cards/Card";
+import MyCustomCard from "./Cards/MyCustomCard";
+import DateRangeSelector from "./DateRangeSelector";
 
-export { Header, Footer, MainCard, Card };
-
+export { Header, Footer, MainCard, MyCustomCard as Card, DateRangeSelector };
