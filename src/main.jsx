@@ -10,11 +10,11 @@ import {
   Login,
   Profile,
   Signup,
+  Bookings,
+  ExpenseTracker,
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
-import Card from "./components/Cards/Card";
-import MainCard from "./components/TripCardMain/MainCard";
 
 const router = createBrowserRouter([
   {
@@ -44,17 +44,7 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
-      },
-      {
-        path: "Cards",
-        element: <Card />,
-      },
-      {
-        path: "TripCardMain",
-        element: <MainCard />,
-      },
-      
-      
+      }
     ],
   },
   {
@@ -64,6 +54,14 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashBoardLayout />,
+  },
+  {
+    path: "/bookings",
+    element: <Bookings />,
+  },
+  {
+    path: "/expenses",
+    element: <ExpenseTracker />,
   },
 ]);
 
