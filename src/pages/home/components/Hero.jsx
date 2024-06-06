@@ -14,10 +14,10 @@ function Hero() {
             share them with friends. Sign up now and start exploring!
           </p>
           <a
-            href="#"
+            href="/plan"
             className="bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-900 transition duration-300"
           >
-            Get Started
+            Start Planning
           </a>
         </div>
 

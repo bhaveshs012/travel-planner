@@ -27,12 +27,7 @@ function Login() {
               <span className="underline">Sign Up Here</span>
             </Link>
           </div>
-          <Button
-            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900"
-            type="submit"
-          >
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
         </form>
       </div>
     </div>

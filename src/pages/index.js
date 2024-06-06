@@ -7,5 +7,17 @@ import Features from "./features/Features";
 import Profile from "./profile/Profile";
 import Bookings from "./bookings/Bookings";
 import ExpenseTracker from "./expenseTracker/ExpenseTracker";
+import CreatePlan from "./plan/createPlan/CreatePlan";
 
-export { Home, Login, Signup, Contact, About, Features, Profile, Bookings, ExpenseTracker };
+export {
+  Home,
+  Login,
+  Signup,
+  Contact,
+  About,
+  Features,
+  Profile,
+  Bookings,
+  ExpenseTracker,
+  CreatePlan,
+};
