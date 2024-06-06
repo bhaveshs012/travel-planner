@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "chart.js": "^4.4.3",
+    "dayjs": "^1.11.11",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^6.9.0",
@@ -18,6 +19,7 @@
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
+    "react-tailwindcss-datepicker": "^1.6.6",
     "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {
