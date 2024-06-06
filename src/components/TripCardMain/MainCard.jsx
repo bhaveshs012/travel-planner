@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function MainCard() {
   const [isClicked, setIsClicked] = useState(false);
@@ -8,14 +8,7 @@ function MainCard() {
   };
 
   return (
-    
-    
-   
-
-    <div className="bg-gray-200 flex items-center space-x-4">
-
-          
-   
+    <div className="bg-gray-200 rounded-3xl w-full flex items-center space-x-4">
       <div className="relative">
         <img
           src="src/assets/image.jpg"
@@ -24,7 +17,7 @@ function MainCard() {
         />
         <button
           className={`absolute top-2 right-2 px-2 py-2 h-10 w-10 rounded-full shadow-md 
-            ${isClicked ? 'bg-white text-white' : 'bg-white text-black'}`}
+            ${isClicked ? "bg-white text-white" : "bg-white text-black"}`}
           onClick={handleClick}
         >
           <svg
@@ -43,13 +36,10 @@ function MainCard() {
         </button>
       </div>
 
-
       <div>
         <div className="px-6 py-4 ">
           <div className="  font-bold text-xl mb-2">The Marina Lake</div>
           <div className=" inline-flex items-center">
-
-
             <svg
               className="h-4 w-4  text-black mr-1"
               fill="none"
@@ -71,25 +61,21 @@ function MainCard() {
             </svg>
 
             <p className="text-gray-700 text-base">
-
-              Best Place to view the Sunset</p>
+              Best Place to view the Sunset
+            </p>
           </div>
 
-
-
           <p className="text-gray-700 text-base">
-
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat<br />
-            dolore accusamus, qui molestias provident dolor neque dolorem. <br />
-            Quibusdam, unde deserunt?</p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
+            <br />
+            dolore accusamus, qui molestias provident dolor neque dolorem.{" "}
+            <br />
+            Quibusdam, unde deserunt?
+          </p>
         </div>
 
-
         <div className="pt-4 pb-2 px-1 inline-flex">
-
-
           {/* Number  */}
-
 
           <span className="inline-flex items-center bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
             <svg
@@ -111,41 +97,38 @@ function MainCard() {
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            120 hours<strong className="mx-2">&bull;</strong>5 nights<strong className="mx-2">&bull;</strong>Only nature
-
-
-
+            120 hours<strong className="mx-2">&bull;</strong>5 nights
+            <strong className="mx-2">&bull;</strong>Only nature
           </span>
-
         </div>
-
 
         <div> Price </div>
-                         
-                         
-                         {/* Dollar Sign  */}
-                         
-        <div className="inline-flex">         
-        <svg className=" inline-flex h-5 w-5 " width="24" height="24" 
-        viewBox="0 0 24 24" 
-        stroke-width="2" 
-        stroke="currentcolor" 
-        fill="none" 
-        stroke-linecap="round" 
-        stroke-linejoin="round">  
-        <path stroke="none" d="M0 0h24v24H0z" />  
-        <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />  
-        <path d="M12 3v3m0 12v3" />
 
-        </svg>
-        
-        <p> <strong> 120 </strong> </p>
+        {/* Dollar Sign  */}
+
+        <div className="inline-flex">
+          <svg
+            className=" inline-flex h-5 w-5 "
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentcolor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
+            <path d="M12 3v3m0 12v3" />
+          </svg>
+
+          <p>
+            {" "}
+            <strong> 120 </strong>{" "}
+          </p>
         </div>
-         
       </div>
-
-
-
     </div>
   );
 }

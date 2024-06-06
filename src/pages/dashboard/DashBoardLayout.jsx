@@ -3,7 +3,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardMain from "./components/DashboardMain";
 const DashBoardLayout = () => {
   return (
-    <div className="grid grid-cols-7 h-screen bg-dashboard-bg">
+    <div className="grid grid-cols-7 h-full">
       <div className="col-span-1">
         <Sidebar />
       </div>
