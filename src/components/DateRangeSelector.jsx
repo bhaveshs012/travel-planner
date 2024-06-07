@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateRangeSelector = () => {
-  const [startDate, setStartDate] = useState(null);
+  const [startDate, setStartDate] = useState(Date.now());
   const [endDate, setEndDate] = useState(null);
 
   return (
@@ -13,6 +13,7 @@ const DateRangeSelector = () => {
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           selectsStart
+          minDate={new Date()}  
           startDate={startDate}
           endDate={endDate}
           placeholderText="Start Date"
