@@ -5,7 +5,7 @@ import { FaUserPlus } from "react-icons/fa6";
 
 function CreatePlan() {
   return (
-    <div className="h-screen p-8 space-y-8 flex flex-col justify-center items-center">
+    <div className="h-svh p-8 space-y-8 flex flex-col justify-center items-center">
       <p className="text-3xl font-bold">Plan a New Trip</p>
       <div className="w-2/4">
         <Input label="Trip Name" placeholder="Give this trip a name ..." />

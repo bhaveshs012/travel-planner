@@ -10,10 +10,10 @@ const TextArea = ({ name, label, placeholder, maxLength = 500, rows = 5 }) => {
       <textarea
         id={id}
         name={name}
-        placeholder={placeholder}
         rows={rows}
+        placeholder={placeholder}
         maxLength={maxLength}
-        className="w-full px-3 py-2 rounded border border-gray-300 focus:border-black focus:outline-none"
+        className="w-full min-h-32 max-h-52 px-3 py-2 rounded border border-gray-300 focus:border-black focus:outline-none"
       />
       <div className="text-sm text-right text-gray-500">
         {maxLength} characters maximum

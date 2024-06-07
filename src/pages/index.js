@@ -8,6 +8,7 @@ import Profile from "./profile/Profile";
 import Bookings from "./bookings/Bookings";
 import ExpenseTracker from "./expenseTracker/ExpenseTracker";
 import CreatePlan from "./plan/createPlan/CreatePlan";
+import EditPlan from "./plan/editPlan/EditPlan";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   Bookings,
   ExpenseTracker,
   CreatePlan,
+  EditPlan,
 };

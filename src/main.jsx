@@ -13,6 +13,7 @@ import {
   Bookings,
   ExpenseTracker,
   CreatePlan,
+  EditPlan,
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
     ],
+  },
+  {
+    path: "plan/edit",
+    element: <EditPlan />,
   },
   {
     path: "/profile",
