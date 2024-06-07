@@ -1,52 +1,51 @@
 import React, { useState } from "react";
 
 const VideoGridView = ({ videos, title }) => {
-  const [playing, setPlaying] = useState({});
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const handleClick = (index) => {
-    setPlaying((prev) => ({ ...prev, [index]: true }));
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
   };
 
   return (
-    <div className="h-full">
-      <div className="flex justify-between px-4 text-sm font-semibold w-full sticky top-0 z-10">
-        <div>{title}</div>
-        <div className="underline text-blue-400 cursor-pointer">View More</div>
-      </div>
-      <div className="overflow-x-scroll flex space-x-4 p-4">
-        {videos.map((video, index) => (
-          <div
-            key={index}
-            className="relative rounded-lg overflow-hidden flex-shrink-0"
-            style={{ width: "300px", height: "200px" }}
-            onClick={() => handleClick(index)}
-          >
-            {playing[index] ? (
-              <video
-                src={video.url}
-                autoPlay
-                loop
-                muted
-                className="object-cover w-full h-full rounded-lg"
-              />
-            ) : (
-              <>
+    <div className="min-h-screen bg-gray-900 p-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between px-4 text-sm font-semibold w-full sticky top-0 z-10 text-white">
+          <div>{title}</div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4">
+          {videos.map((video, index) => (
+            <div
+              key={index}
+              className={`relative rounded-lg overflow-hidden transition-transform duration-300 ${
+                hoveredIndex === index ? "transform scale-110" : ""
+              }`}
+              style={{ width: "100%", height: "200px" }}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
+              {hoveredIndex === index ? (
+                <video
+                  src={video.url}
+                  autoPlay
+                  loop
+                  muted
+                  className="object-cover w-full h-full rounded-lg"
+                />
+              ) : (
                 <img
                   src={video.thumbnail}
                   alt={`Video ${index + 1}`}
                   className="object-cover w-full h-full rounded-lg"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                  <i className="fas fa-play text-white text-4xl"></i>
-                </div>
-                <div className="absolute top-2 right-2 flex items-center bg-gray-800 bg-opacity-75 text-white text-sm px-2 py-1 rounded">
-                  <i className="fas fa-heart mr-1 text-red-500"></i>
-                  <span>{video.likes}</span>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
