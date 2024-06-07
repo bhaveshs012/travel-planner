@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,6 +16,8 @@ import {
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
+
+export const SidebarContext = createContext();
 
 const router = createBrowserRouter([
   {
@@ -70,8 +72,18 @@ const router = createBrowserRouter([
   },
 ]);
 
+const Main = () => {
+  const [expanded, setExpanded] = useState(true);
+
+  return (
+    <SidebarContext.Provider value={{ expanded, setExpanded }}>
+      <RouterProvider router={router} />
+    </SidebarContext.Provider>
+  );
+};
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Main />
   </React.StrictMode>
 );
