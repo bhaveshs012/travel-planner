@@ -34,9 +34,11 @@ function ExpenseListItem({
             <div className="flex gap-1 items-center text-sm text-gray-600">
               <FaPeopleGroup />
               <div className="flex space-x-1">
-                <span className="font-semibold">People Involed:</span>
-                {peopleInvoled.map((person) => (
-                  <p className="flex">{person}</p>
+                <span className="font-semibold">Split Between:</span>
+                {peopleInvoled.map((person, index) => (
+                  <p key={index} className="flex">
+                    {person}
+                  </p>
                 ))}
               </div>
             </div>

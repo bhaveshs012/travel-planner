@@ -9,6 +9,9 @@ import BudgetSummaryCard from "./BudgetSummaryCard";
 import ExpenseSection from "./ExpenseSection";
 import SectionHeading from "./SectionHeading";
 import ExpenseListItem from "./ExpenseListItem";
+import SideBar from "./SideBar";
+import SideBarHeader from "./SideBarHeader";
+import SideBarLink from "./SideBarLink";
 
 export {
   MainContentSpace,
@@ -22,4 +25,7 @@ export {
   ExpenseSection,
   SectionHeading,
   ExpenseListItem,
+  SideBar,
+  SideBarHeader,
+  SideBarLink,
 };
