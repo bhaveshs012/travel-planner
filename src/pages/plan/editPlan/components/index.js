@@ -5,6 +5,11 @@ import ItinerarySection from "./ItinerarySection";
 import DatePickerComponent from "./DatePickerComponent";
 import ItineraryListItem from "./ItineraryListItem";
 import BudgetSection from "./BudgetSection";
+import BudgetSummaryCard from "./BudgetSummaryCard";
+import ExpenseSection from "./ExpenseSection";
+import SectionHeading from "./SectionHeading";
+import ExpenseListItem from "./ExpenseListItem";
+
 export {
   MainContentSpace,
   HeroSection,
@@ -13,4 +18,8 @@ export {
   DatePickerComponent,
   ItineraryListItem,
   BudgetSection,
+  BudgetSummaryCard,
+  ExpenseSection,
+  SectionHeading,
+  ExpenseListItem,
 };

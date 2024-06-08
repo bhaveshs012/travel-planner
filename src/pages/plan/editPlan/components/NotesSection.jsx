@@ -1,14 +1,16 @@
 import React from "react";
 import TextArea from "../../../../components/Form/TextArea";
+import { SectionHeading } from "./index";
 
 function NotesSection() {
   return (
     <section>
-      <h1 className="text-2xl font-bold">Notes</h1>
-      <p className="text-md text-gray-400 mt-2">
-        You can make a note of important instructions or precautions to be
-        followed..
-      </p>
+      <SectionHeading
+        title={"Notes"}
+        subtile={
+          " You can make a note of important instructions or precautions to be followed..."
+        }
+      />
       <TextArea maxLength={2000} />
     </section>
   );

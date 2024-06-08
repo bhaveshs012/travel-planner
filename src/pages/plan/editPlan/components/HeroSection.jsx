@@ -4,6 +4,7 @@ import {
   FaPersonCirclePlus,
   FaPencil,
 } from "react-icons/fa6";
+import { ButtonWithIcon } from "../../../../components/Buttons";
 
 function HeroSection() {
   return (
@@ -26,12 +27,12 @@ function HeroSection() {
         </p>
         <div className="flex justify-between space-x-2">
           <div>
-            <button className="my-1 flex items-center justify-center space-x-2 bg-gray-200 text-gray-800 p-2 rounded-lg">
-              <span>
-                <FaRegCalendarDays />
-              </span>
-              <span className="text-sm font-semibold">Add Trip Dates</span>
-            </button>
+            <ButtonWithIcon
+              title={"Add Trip Dates"}
+              icon={<FaRegCalendarDays />}
+              textColor="text-gray-800"
+              bgColor="bg-gray-200"
+            />
           </div>
           <div className="my-1 flex justify-center items-center space-x-2">
             <button className="bg-gray-200 text-gray-800 p-2 rounded-full">
