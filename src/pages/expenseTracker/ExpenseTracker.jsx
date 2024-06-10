@@ -1,15 +1,15 @@
 import React from "react";
-import {
-  Header,
-  ExpenseTrackerGraphs,
-  TripWiseExpenseCard,
-} from "./components";
+import { ExpenseTrackerGraphs, TripWiseExpenseCard } from "./components";
 import tripWiseExpense from "./data/tripwiseExpense";
+import { PageHeader } from "../../components/index";
 
 function ExpenseTracker() {
   return (
     <div className="p-8">
-      <Header />
+      <PageHeader
+        title={"Expense Tracker"}
+        subtitle={"Keep Track of Your Journey's Finances with Ease"}
+      />
       <div>
         <ExpenseTrackerGraphs />
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import AvatarRow from "../../bookings/components/TripCard/AvatarRow";
+import { convertToINR } from "../../../utils/currencyFormatter";
 
 function TripWiseExpenseCard({
   plannedBudget,
@@ -31,19 +32,11 @@ function TripWiseExpenseCard({
       <div className="flex flex-col w-1/2 p-4 space-y-8 rounded-tr-lg rounded-br-lg bg-black text-white justify-center items-center text-center">
         <div>
           <p className="text-lg">Planned Budget</p>
-          <p className="text-2xl font-bold">{`${Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR",
-            minimumFractionDigits: 2,
-          }).format(plannedBudget)}`}</p>
+          <p className="text-2xl font-bold">{convertToINR(plannedBudget)}</p>
         </div>
         <div>
           <p className="text-lg">Actual Spending</p>
-          <p className="text-2xl font-bold">{`${Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR",
-            minimumFractionDigits: 2,
-          }).format(actualSpending)}`}</p>
+          <p className="text-2xl font-bold">{convertToINR(actualSpending)}</p>
         </div>
         <div>
           <p className="text-lg">
@@ -53,11 +46,9 @@ function TripWiseExpenseCard({
             className={`text-2xl font-bold ${
               actualSpending > plannedBudget ? "text-red-500" : "text-green-500"
             }`}
-          >{`${Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR",
-            minimumFractionDigits: 2,
-          }).format(Math.abs(actualSpending - plannedBudget))}`}</p>
+          >
+            {convertToINR(Math.abs(actualSpending - plannedBudget))}
+          </p>
         </div>
       </div>
     </div>
