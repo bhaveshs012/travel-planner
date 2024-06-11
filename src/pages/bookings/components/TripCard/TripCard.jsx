@@ -1,5 +1,5 @@
 import React from "react";
-import AvatarRow from "./AvatarRow";
+import { AvatarRow } from "../../../../components";
 import { FaPlus } from "react-icons/fa6";
 
 function TripCard() {

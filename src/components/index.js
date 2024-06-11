@@ -4,6 +4,7 @@ import MainCard from "./TripCardMain/MainCard";
 import MyCustomCard from "./Cards/MyCustomCard";
 import DateRangeSelector from "./DateRangeSelector";
 import PageHeader from "./Header/PageHeader";
+import AvatarRow from '../components/AvatarRow'
 
 export {
   Header,
@@ -12,4 +13,5 @@ export {
   MyCustomCard as Card,
   DateRangeSelector,
   PageHeader,
+  AvatarRow
 };

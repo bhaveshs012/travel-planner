@@ -1,5 +1,5 @@
 import React from "react";
-import AvatarRow from "../../bookings/components/TripCard/AvatarRow";
+import { AvatarRow } from "../../../components";
 import { convertToINR } from "../../../utils/currencyFormatter";
 
 function TripWiseExpenseCard({

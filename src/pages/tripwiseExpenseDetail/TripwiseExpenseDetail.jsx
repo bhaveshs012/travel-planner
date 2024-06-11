@@ -1,14 +1,18 @@
 import React from "react";
 import { PageHeader } from "../../components";
 import { BudgetSummaryCard } from "../plan/editPlan/components";
-import { BasicTableLayout } from "./components";
-import { amountPaidByEach, amountOwedByYou, amountOwedToYou } from "./data";
-import { SmallFilledButton } from "../../components/Buttons";
+import { BasicTableLayout, TransactionTile } from "./components";
+import { FaFilter } from "react-icons/fa6";
+import {
+  amountPaidByEach,
+  amountOwedByYou,
+  amountOwedToYou,
+  transactions,
+} from "./data";
+import { ButtonWithIcon, SmallFilledButton } from "../../components/Buttons";
 
 function TripwiseExpenseDetail() {
   const [totalExpenses, fixedBudget] = [12500, 40000];
-  console.log(totalExpenses);
-  console.log(fixedBudget);
   return (
     <div className="p-8 flex flex-col gap-y-8">
       <PageHeader
@@ -23,7 +27,7 @@ function TripwiseExpenseDetail() {
         />
       </div>
       <div className="flex items-center justify-between">
-        <p className="text-lg font-bold">Contribution Summary</p>
+        <p className="text-xl font-bold">Contribution Summary</p>
         <SmallFilledButton title={"Settle Up"} />
       </div>
 
@@ -40,6 +44,18 @@ function TripwiseExpenseDetail() {
           heading={"Amount Owed to You"}
           data={amountOwedToYou}
         />
+      </div>
+      <div className="flex justify-between items-center">
+        <PageHeader
+          title={"Transaction History"}
+          subtitle={"View all of your transactions at one place"}
+        />
+        <ButtonWithIcon title={"Filter By"} icon={<FaFilter />} />
+      </div>
+      <div className="flex flex-col gap-y-4">
+        {transactions.map((transacion, index) => (
+          <TransactionTile key={index} {...transacion} />
+        ))}
       </div>
     </div>
   );

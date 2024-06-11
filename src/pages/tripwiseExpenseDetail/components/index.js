@@ -1,3 +1,3 @@
 import BasicTableLayout from "./BasicTableLayout";
-
-export { BasicTableLayout };
+import TransactionTile from "./TransactionTile";
+export { BasicTableLayout, TransactionTile };

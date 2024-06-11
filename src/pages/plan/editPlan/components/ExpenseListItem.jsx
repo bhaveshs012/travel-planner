@@ -1,6 +1,6 @@
 import React from "react";
 import { FaPerson, FaCalendarDays, FaPeopleGroup } from "react-icons/fa6";
-import categoryIconList from "../data/categoryIconList.jsx";
+import { getIconForCategory } from "../../../../utils/getIconForCategory";
 
 function ExpenseListItem({
   category,
@@ -10,13 +10,11 @@ function ExpenseListItem({
   paymentDate,
   peopleInvoled,
 }) {
-  const IconComponent =
-    categoryIconList[category] || categoryIconList.miscellaneous;
   return (
     <div className="flex items-center justify-between p-4 shadow-lg">
       <div className="flex items-center">
         <div className="p-4 rounded-lg bg-black text-center mr-4 text-white">
-          <IconComponent />
+          {getIconForCategory(category)}
         </div>
         <div className="items-start">
           <div className="text-lg font-semibold text-black">{paidTo}</div>
