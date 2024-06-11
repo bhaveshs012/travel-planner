@@ -14,6 +14,7 @@ import {
   ExpenseTracker,
   CreatePlan,
   EditPlan,
+  TripwiseExpenseDetail,
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: "/expenses",
     element: <ExpenseTracker />,
+  },
+  {
+    path: "/expenses/detail",
+    element: <TripwiseExpenseDetail />,
   },
 ]);
 

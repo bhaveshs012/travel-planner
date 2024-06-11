@@ -9,6 +9,7 @@ import Bookings from "./bookings/Bookings";
 import ExpenseTracker from "./expenseTracker/ExpenseTracker";
 import CreatePlan from "./plan/createPlan/CreatePlan";
 import EditPlan from "./plan/editPlan/EditPlan";
+import TripwiseExpenseDetail from "./tripwiseExpenseDetail/TripwiseExpenseDetail";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   ExpenseTracker,
   CreatePlan,
   EditPlan,
+  TripwiseExpenseDetail,
 };

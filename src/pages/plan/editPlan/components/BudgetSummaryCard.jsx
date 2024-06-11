@@ -1,8 +1,13 @@
 import React from "react";
 import { FaRegMoneyBill1, FaMoneyBillTransfer } from "react-icons/fa6";
 import { ButtonWithIcon } from "../../../../components/Buttons";
+import { convertToINR } from "../../../../utils/currencyFormatter";
 
-function BudgetSummaryCard({ totalExpenses, fixedBudget }) {
+function BudgetSummaryCard({
+  totalExpenses,
+  fixedBudget,
+  buttonsRequired = true,
+}) {
   const getSpendingPercentage = (totalExpenses, fixedBudget) => {
     // Convert inputs to numbers
     const expenses = Number(totalExpenses);
@@ -21,23 +26,15 @@ function BudgetSummaryCard({ totalExpenses, fixedBudget }) {
   };
 
   return (
-    <div className="bg-gray-100 border border-[0.5] border-gray-200 shadow-lg justify-center items-center p-8 rounded-lg">
+    <div className="h-full bg-gray-100 border border-[0.5] border-gray-200 shadow-lg justify-center items-center p-8 rounded-lg">
       <div className="flex flex-col gap-y-4">
         <div>
           <p className="text-lg">Expenses</p>
-          <p className="text-2xl font-bold">{`${Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR",
-            minimumFractionDigits: 2,
-          }).format(totalExpenses)}`}</p>
+          <p className="text-2xl font-bold">{convertToINR(totalExpenses)}</p>
         </div>
         <div>
           <p className="text-lg">Planned Budget</p>
-          <p className="text-2xl font-bold">{`${Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR",
-            minimumFractionDigits: 2,
-          }).format(fixedBudget)}`}</p>
+          <p className="text-2xl font-bold">{convertToINR(fixedBudget)}</p>
         </div>
         {/* Spending Indicator */}
         <div className="w-full bg-gray-200 rounded-full h-2.5">
@@ -46,20 +43,22 @@ function BudgetSummaryCard({ totalExpenses, fixedBudget }) {
             style={{ width: getSpendingPercentage(totalExpenses, fixedBudget) }}
           ></div>
         </div>
-        <div className="flex space-x-4">
-          <div>
-            <ButtonWithIcon
-              title={fixedBudget !== 0 ? "Edit Budget" : "Set a Budget"}
-              icon={<FaRegMoneyBill1 />}
-            />
+        {buttonsRequired && (
+          <div className="flex space-x-4">
+            <div>
+              <ButtonWithIcon
+                title={fixedBudget !== 0 ? "Edit Budget" : "Set a Budget"}
+                icon={<FaRegMoneyBill1 />}
+              />
+            </div>
+            <div>
+              <ButtonWithIcon
+                title={"Debt Summary"}
+                icon={<FaMoneyBillTransfer />}
+              />
+            </div>
           </div>
-          <div>
-            <ButtonWithIcon
-              title={"Debt Summary"}
-              icon={<FaMoneyBillTransfer />}
-            />
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
