@@ -10,6 +10,7 @@ import ExpenseTracker from "./expenseTracker/ExpenseTracker";
 import CreatePlan from "./plan/createPlan/CreatePlan";
 import EditPlan from "./plan/editPlan/EditPlan";
 import TripwiseExpenseDetail from "./tripwiseExpenseDetail/TripwiseExpenseDetail";
+import Discover from "./discover/Discover";
 
 export {
   Home,
@@ -24,4 +25,5 @@ export {
   CreatePlan,
   EditPlan,
   TripwiseExpenseDetail,
+  Discover,
 };

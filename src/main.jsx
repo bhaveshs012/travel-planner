@@ -15,6 +15,7 @@ import {
   CreatePlan,
   EditPlan,
   TripwiseExpenseDetail,
+  Discover,
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
   {
     path: "/expenses/detail",
     element: <TripwiseExpenseDetail />,
+  },
+  {
+    path: "/discover",
+    element: <Discover />,
   },
 ]);
 

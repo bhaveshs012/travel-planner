@@ -1,8 +1,9 @@
 import React from "react";
 import { PageHeader } from "../../components";
 import { BudgetSummaryCard } from "../plan/editPlan/components";
-import { BasicTableLayout, TransactionTile } from "./components";
+import { BasicTableLayout, FilterModal, TransactionTile } from "./components";
 import { FaFilter } from "react-icons/fa6";
+import { useState } from "react";
 import {
   amountPaidByEach,
   amountOwedByYou,
@@ -13,6 +14,11 @@ import { ButtonWithIcon, SmallFilledButton } from "../../components/Buttons";
 
 function TripwiseExpenseDetail() {
   const [totalExpenses, fixedBudget] = [12500, 40000];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
   return (
     <div className="p-8 flex flex-col gap-y-8">
       <PageHeader
@@ -50,8 +56,13 @@ function TripwiseExpenseDetail() {
           title={"Transaction History"}
           subtitle={"View all of your transactions at one place"}
         />
-        <ButtonWithIcon title={"Filter By"} icon={<FaFilter />} />
+        <ButtonWithIcon
+          title={"Filter By"}
+          icon={<FaFilter />}
+          onClick={handleOpenModal}
+        />
       </div>
+      <FilterModal isOpen={isModalOpen} onClose={handleCloseModal} />
       <div className="flex flex-col gap-y-4">
         {transactions.map((transacion, index) => (
           <TransactionTile key={index} {...transacion} />
