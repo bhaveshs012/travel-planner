@@ -1,8 +1,8 @@
 import React from "react";
 
-function PageHeader({ title, subtitle }) {
+function PageHeader({ title, subtitle, className }) {
   return (
-    <div>
+    <div className={className}>
       <p className="text-xl font-bold">{title}</p>
       <p className="text-md text-gray-600 text-pretty">{subtitle}</p>
     </div>
