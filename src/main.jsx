@@ -16,6 +16,7 @@ import {
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
+import TripCardMain from "./components/TripCardMain/MainCard"
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
   {
     path: "/expenses",
     element: <ExpenseTracker />,
+  },
+  {
+    path: "/MainCard",
+    element: <TripCardMain />,
   },
 ]);
 
