@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Calendar.css";
 
-const Calendar = () => {
+const Calendar = ({ className }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -23,7 +23,7 @@ const Calendar = () => {
         useWeekdaysShort={true}
         inline
         minDate={new Date()}
-        calendarClassName="rounded-lg shadow-md bg-white"
+        calendarClassName={`rounded-lg shadow-md bg-white ${className}`}
       />
     </div>
   );

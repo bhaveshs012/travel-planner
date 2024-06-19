@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -13,10 +13,15 @@ import {
   Bookings,
   ExpenseTracker,
   CreatePlan,
+  EditPlan,
+  TripwiseExpenseDetail,
+  Discover,
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
 import TripCardMain from "./components/TripCardMain/MainCard"
+
+export const SidebarContext = createContext();
 
 const router = createBrowserRouter([
   {
@@ -54,6 +59,10 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "plan/edit",
+    element: <EditPlan />,
+  },
+  {
     path: "/profile",
     element: <Profile />,
   },
@@ -70,13 +79,29 @@ const router = createBrowserRouter([
     element: <ExpenseTracker />,
   },
   {
-    path: "/MainCard",
-    element: <TripCardMain />,
+
+    path: "/expenses/detail",
+    element: <TripwiseExpenseDetail />,
+  },
+  {
+    path: "/discover",
+    element: <Discover />,
+
   },
 ]);
 
+const Main = () => {
+  const [expanded, setExpanded] = useState(true);
+
+  return (
+    <SidebarContext.Provider value={{ expanded, setExpanded }}>
+      <RouterProvider router={router} />
+    </SidebarContext.Provider>
+  );
+};
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Main />
   </React.StrictMode>
 );
