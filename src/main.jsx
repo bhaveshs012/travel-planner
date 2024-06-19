@@ -19,6 +19,7 @@ import {
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
+import TripCardMain from "./components/TripCardMain/MainCard"
 
 export const SidebarContext = createContext();
 
@@ -78,12 +79,14 @@ const router = createBrowserRouter([
     element: <ExpenseTracker />,
   },
   {
+
     path: "/expenses/detail",
     element: <TripwiseExpenseDetail />,
   },
   {
     path: "/discover",
     element: <Discover />,
+
   },
 ]);
 
