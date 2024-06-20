@@ -1,8 +1,8 @@
 import React, { useId } from "react";
 
 const Input = React.forwardRef(function Input(
-  { label, type = "text", className = "", ...props },
-  ref //* Reference bhi pass krenge
+  { label, type = "text", className = "", error, ...props },
+  ref
 ) {
   const id = useId();
   return (
@@ -15,11 +15,14 @@ const Input = React.forwardRef(function Input(
         )}
         <input
           type={type}
-          className={`w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-black focus:outline-none`}
+          className={`w-full px-3 py-2 rounded-lg border ${
+            error ? "border-red-500" : "border-gray-300"
+          } focus:border-black focus:outline-none`}
           ref={ref}
-          {...props}
           id={id}
+          {...props}
         />
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
     </>
   );
