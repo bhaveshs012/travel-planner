@@ -8,6 +8,12 @@ import {
   PhoneNumberInput,
 } from "../../components/Form";
 import { PageHeader } from "../../components";
+import ApiConstants from "../../constants/apiConstants";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { login, loginFailure } from "../../features/authSlice";
 
 function Signup() {
   const {
@@ -16,9 +22,55 @@ function Signup() {
     formState: { errors },
     watch,
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  //* Redux
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.auth);
+
+  //* Toasts for Errors
+  let toastId = null;
+  useEffect(() => {
+    if (error) {
+      if (!toast.isActive(toastId)) {
+        toastId = toast.error(error);
+      }
+    }
+  }, [error]);
+
+  const onSubmit = async ({
+    firstName,
+    lastName,
+    email,
+    username,
+    password,
+    avatar,
+  }) => {
+    try {
+      setIsLoading(true);
+      const fullName = firstName + " " + lastName;
+      const formData = new FormData();
+      formData.append("fullName", fullName);
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("avatar", avatar);
+
+      const response = await axios.post(
+        `${ApiConstants.baseUrl}/users/register`,
+        formData
+      );
+      toast.success(response.data.message);
+      dispatch(login(response.data.data.user));
+    } catch (error) {
+      if (error.response) {
+        const errorMessage = error.response.data.message || "An error occurred";
+        toast.error(errorMessage); // Display the error message in a toast
+        dispatch(loginFailure(errorMessage)); // Optionally dispatch an action to store the error in Redux
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -61,16 +113,12 @@ function Signup() {
               })}
               error={errors.email?.message}
             />
-            <PhoneNumberInput
-              label="Phone Number"
-              {...register("phoneNumber", {
-                required: "Phone number is required",
-                pattern: {
-                  value: /^[0-9]+$/,
-                  message: "Enter a valid phone number",
-                },
-              })}
-              error={errors.phoneNumber?.message}
+            <Input
+              label="Username"
+              placeholder="Enter your username"
+              className="my-4 w-full"
+              {...register("username", { required: "username is required" })}
+              error={errors.lastName?.message}
             />
           </div>
           <div className="flex flex-row gap-x-8 w-full justify-center">
@@ -108,10 +156,11 @@ function Signup() {
             </Link>
           </div>
           <Button
-            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900"
+            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900 disabled:bg-slate-300"
             type="submit"
+            disabled={isLoading}
           >
-            Sign Up
+            {!isLoading ? "Sign Up" : "Please Wait ..."}
           </Button>
         </form>
       </div>

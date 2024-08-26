@@ -45,12 +45,6 @@ function Login() {
         const errorMessage = error.response.data.message || "An error occurred";
         toast.error(errorMessage); // Display the error message in a toast
         dispatch(loginFailure(errorMessage)); // Optionally dispatch an action to store the error in Redux
-      } else if (error.request) {
-        // The request was made but no response was received
-        toast.error("No response from the server. Please try again later.");
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        toast.error("An error occurred. Please try again.");
       }
     } finally {
       setIsLoading(false);
@@ -93,8 +87,12 @@ function Login() {
               <span className="underline">Sign Up Here</span>
             </Link>
           </div>
-          <Button type="submit" disabled={isLoading}>
-            Login
+          <Button
+            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900 disabled:bg-slate-300"
+            type="submit"
+            disabled={isLoading}
+          >
+            {!isLoading ? "Login" : "Please Wait ..."}
           </Button>
         </form>
       </div>
