@@ -19,7 +19,10 @@ import {
 } from "./pages/index";
 import Layout from "./Layout";
 import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
-import TripCardMain from "./components/TripCardMain/MainCard"
+import { Provider } from "react-redux";
+import { store } from "./store.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SidebarContext = createContext();
 
@@ -79,14 +82,12 @@ const router = createBrowserRouter([
     element: <ExpenseTracker />,
   },
   {
-
     path: "/expenses/detail",
     element: <TripwiseExpenseDetail />,
   },
   {
     path: "/discover",
     element: <Discover />,
-
   },
 ]);
 
@@ -96,12 +97,15 @@ const Main = () => {
   return (
     <SidebarContext.Provider value={{ expanded, setExpanded }}>
       <RouterProvider router={router} />
+      <ToastContainer />
     </SidebarContext.Provider>
   );
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Main />
+    <Provider store={store}>
+      <Main />
+    </Provider>
   </React.StrictMode>
 );
