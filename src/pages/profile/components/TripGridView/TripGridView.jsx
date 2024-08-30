@@ -1,10 +1,10 @@
 import React from "react";
-import Card from "./Card";
+import { TripSummaryCard } from "../../../../components/index";
 const TripGridView = () => {
   return (
     <div className="min-h-screen bg-gray-900 p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8  gap-4 mt-4">
-        <Card
+        <TripSummaryCard
           image={
             "https://images.unsplash.com/photo-1545580492-8859ba8323f0?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
@@ -15,7 +15,7 @@ const TripGridView = () => {
           title="HongKong"
           people={4}
         />
-        <Card
+        <TripSummaryCard
           image={
             "https://images.unsplash.com/photo-1545580492-8859ba8323f0?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
@@ -26,7 +26,7 @@ const TripGridView = () => {
           title="HongKong"
           people={4}
         />
-        <Card
+        <TripSummaryCard
           image={
             "https://images.unsplash.com/photo-1545580492-8859ba8323f0?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
@@ -37,7 +37,7 @@ const TripGridView = () => {
           title="HongKong"
           people={4}
         />
-        <Card
+        <TripSummaryCard
           image={
             "https://images.unsplash.com/photo-1545580492-8859ba8323f0?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }

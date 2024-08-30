@@ -7,10 +7,11 @@ import Features from "./features/Features";
 import Profile from "./profile/Profile";
 import Bookings from "./bookings/Bookings";
 import ExpenseTracker from "./expenseTracker/ExpenseTracker";
-import CreatePlan from "./plan/createPlan/CreatePlan";
+import CreatePlanStarterPage from "./plan/createPlan/CreatePlan";
 import EditPlan from "./plan/editPlan/EditPlan";
 import TripwiseExpenseDetail from "./tripwiseExpenseDetail/TripwiseExpenseDetail";
 import Discover from "./discover/Discover";
+import PageNotFound from "./common/PageNotFound";
 
 export {
   Home,
@@ -22,8 +23,9 @@ export {
   Profile,
   Bookings,
   ExpenseTracker,
-  CreatePlan,
+  CreatePlanStarterPage,
   EditPlan,
   TripwiseExpenseDetail,
   Discover,
+  PageNotFound,
 };

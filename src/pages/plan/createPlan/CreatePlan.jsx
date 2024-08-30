@@ -3,7 +3,7 @@ import { Input, Button } from "../../../components/Form";
 import { DateRangeSelector } from "../../../components";
 import { FaUserPlus } from "react-icons/fa6";
 
-function CreatePlan() {
+function CreatePlanStarterPage() {
   return (
     <div className="h-svh p-8 space-y-8 flex flex-col justify-center items-center">
       <p className="text-3xl font-bold">Plan a New Trip</p>
@@ -27,4 +27,4 @@ function CreatePlan() {
   );
 }
 
-export default CreatePlan;
+export default CreatePlanStarterPage;

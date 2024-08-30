@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, Button } from "../../components/Form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { login, loginFailure } from "../../features/authSlice";
@@ -20,7 +20,11 @@ function Login() {
 
   //* Redux
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { error, isAuthenticated } = useSelector((state) => state.auth);
+
+  const fromRoute = location.state?.from?.pathname || "/";
 
   //* Toasts for Errors
   let toastId = null;
@@ -32,6 +36,14 @@ function Login() {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(location.state?.from?.pathname || "/dashboard", {
+        replace: true,
+      });
+    }
+  }, [isAuthenticated]);
+
   const onSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
@@ -40,6 +52,7 @@ function Login() {
         password,
       });
       dispatch(login(response.data.data.user));
+      navigate(fromRoute, { replace: true });
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message || "An error occurred";

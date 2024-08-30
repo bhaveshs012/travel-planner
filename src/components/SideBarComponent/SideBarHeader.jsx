@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../../../assets/Logo2.png";
+import Logo from "../../assets/Logo2.png";
 import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 
 function SideBarHeader({ handleToggleSideBar, isSideBarOpen }) {
@@ -8,7 +8,7 @@ function SideBarHeader({ handleToggleSideBar, isSideBarOpen }) {
       {isSideBarOpen && (
         <div className="flex items-center">
           <img src={Logo} className="mr-3 h-12" alt="Logo" />
-          <p className="text-sm font-bold">JourneySync</p>
+          <p className="text-lg font-bold">JourneySync</p>
         </div>
       )}
       <button

@@ -12,15 +12,18 @@ import {
   Signup,
   Bookings,
   ExpenseTracker,
-  CreatePlan,
+  CreatePlanStarterPage,
   EditPlan,
   TripwiseExpenseDetail,
   Discover,
+  PageNotFound,
 } from "./pages/index";
+import ProtectedRoute from "./wrappers/ProtectedRoute.jsx";
 import Layout from "./Layout";
-import DashBoardLayout from "./pages/dashboard/DashBoardLayout";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import { Provider } from "react-redux";
-import { store } from "./store.js";
+import { store, persistor } from "./store.js";
+import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -34,10 +37,6 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
-      },
-      {
-        path: "plan",
-        element: <CreatePlan />,
       },
       {
         path: "features",
@@ -62,32 +61,82 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "plan/edit",
-    element: <EditPlan />,
-  },
-  {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout />,
-  },
-  {
-    path: "/bookings",
-    element: <Bookings />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/expenses",
     element: <ExpenseTracker />,
   },
   {
-    path: "/expenses/detail",
-    element: <TripwiseExpenseDetail />,
+    path: "/plan",
+    children: [
+      {
+        path: "create",
+        element: (
+          <ProtectedRoute>
+            <CreatePlanStarterPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "edit",
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/:tripId",
+    children: [
+      {
+        path: "",
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "expenses",
+        element: (
+          <ProtectedRoute>
+            <TripwiseExpenseDetail />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/discover",
     element: <Discover />,
+  },
+  {
+    path: "*", // This will catch all unmatched routes
+    element: <PageNotFound />,
   },
 ]);
 
@@ -105,7 +154,9 @@ const Main = () => {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Main />
+      <PersistGate loading={null} persistor={persistor}>
+        <Main />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
