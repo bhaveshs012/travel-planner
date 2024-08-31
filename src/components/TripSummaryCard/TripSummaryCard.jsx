@@ -3,24 +3,25 @@ import Detail from "./Detail";
 import { FaCalendarDays } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa6";
+import tripIllustration from "../../assets/trip-illustration.jpg";
 
 const TripSummaryCard = ({
-  image,
-  title,
-  tripStartDate,
+  // image,
+  tripName,
+  tripId,
   placesToVisit,
-  description,
-  days,
-  nights,
-  people,
-  amount,
+  tripDesc,
+  totalDays,
+  totalNights,
+  totalMembers,
+  plannedBudget,
 }) => {
   return (
-    <div className="flex flex-col flex-shrink-0 w-1/2 rounded-lg overflow-hidden shadow-lg bg-white space-y-4 gap-y-4 p-2">
-      <img className="w-full rounded-t" src={image} alt="Trip" />
+    <div className="flex flex-col flex-shrink-0 w-1/2 rounded-lg overflow-hidden shadow-lg bg-white space-y-4 gap-y-2 p-2">
+      <img className="w-full rounded-t" src={tripIllustration} alt="Trip" />
       <div>
-        <div className="font-bold text-2xl overflow-auto">{title}</div>
-        <p className="text-gray-700 text-base font-normal">{description}</p>
+        <div className="font-bold text-2xl overflow-auto">{tripName}</div>
+        <p className="text-gray-700 text-base font-normal">{tripDesc}</p>
         <div className="flex-grow space-y-4">
           {placesToVisit.map((place) => (
             <Detail content={place} />
@@ -28,20 +29,24 @@ const TripSummaryCard = ({
         </div>
       </div>
       <div className="flex flex-wrap items-center">
-        <div className="flex-grow">
+        <div className="flex-grow space-y-4">
           <Detail
             className="align-middle content-center"
-            content={`${days} Days - ${nights} Nights`}
+            content={`${totalDays} Days - ${totalNights} Nights`}
             icon={<FaCalendarDays />}
             boldText
           />
 
           <Detail
-            content={`${people} People`}
+            content={`${totalMembers} People`}
             icon={<FaPeopleGroup />}
             boldText
           />
-          <Detail content={`₹ ${amount}`} icon={<FaMoneyBillWave />} boldText />
+          <Detail
+            content={`₹ ${plannedBudget}`}
+            icon={<FaMoneyBillWave />}
+            boldText
+          />
         </div>
       </div>
     </div>

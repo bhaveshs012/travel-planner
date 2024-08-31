@@ -12,6 +12,7 @@ import EditPlan from "./plan/editPlan/EditPlan";
 import TripwiseExpenseDetail from "./tripwiseExpenseDetail/TripwiseExpenseDetail";
 import Discover from "./discover/Discover";
 import PageNotFound from "./common/PageNotFound";
+import Dashboard from "./dashboard/Dashboard";
 
 export {
   Home,
@@ -28,4 +29,5 @@ export {
   TripwiseExpenseDetail,
   Discover,
   PageNotFound,
+  Dashboard,
 };

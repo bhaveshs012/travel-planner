@@ -4,13 +4,16 @@ import UpcomingTripSection from "./UpcomingTripSection";
 import UserCreatedTripsSection from "./UserCreatedTripsSection";
 import UserJoinedTripsSection from "./UserJoinedTripsSection";
 
-const DashBoardMainContent = () => {
+const DashBoardMainContent = ({ dashboardTripSummary }) => {
+
   return (
     <div className="p-8 gap-y-8 space-y-8">
       <TopBar />
-      <UpcomingTripSection />
-      <UserCreatedTripsSection />
-      <UserJoinedTripsSection />
+      <UpcomingTripSection tripDetails={dashboardTripSummary.upcomingTrip} />
+      <UserCreatedTripsSection
+        tripDetails={dashboardTripSummary.createdTrips}
+      />
+      <UserJoinedTripsSection tripDetails={dashboardTripSummary.joinedTrips} />
     </div>
   );
 };

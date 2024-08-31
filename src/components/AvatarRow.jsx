@@ -1,14 +1,10 @@
 import React from "react";
 
-const AvatarRow = () => {
-  const avatars = [
-    "https://i.pravatar.cc/150?img=1",
-    "https://i.pravatar.cc/150?img=2",
-    "https://i.pravatar.cc/150?img=3",
-    "https://i.pravatar.cc/150?img=4",
-    "https://i.pravatar.cc/150?img=5",
-  ];
-
+const AvatarRow = ({ totalMembers }) => {
+  const avatars = [];
+  for (let index = 1; index <= totalMembers; index++) {
+    avatars[index] = `https://i.pravatar.cc/150?img=${index}`;
+  }
   return (
     <div className="flex -space-x-4">
       {avatars.map((avatar, index) => (

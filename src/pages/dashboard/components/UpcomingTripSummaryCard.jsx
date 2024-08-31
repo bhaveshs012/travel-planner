@@ -6,12 +6,14 @@ import { FaMoneyBillWave } from "react-icons/fa6";
 
 const TripSummaryCardHorizontal = ({
   image,
+  tripId,
   title,
   description,
   days,
   nights,
   people,
   tripStartDate,
+  placesToVisit,
   amount,
 }) => {
   return (
@@ -33,15 +35,13 @@ const TripSummaryCardHorizontal = ({
             </div>
           </div>
           <p className="text-gray-700 text-base font-normal">{description}</p>
-          <div className="flex-grow">
-            <Detail content="Disneyland" />
-            <Detail content="Man Mo Temple" />
-            <Detail content="The Peak" />
-            <Detail content="The Big Buddha" />
-            <Detail content="The Big Buddha" />
+          <div className="flex-grow space-y-4">
+            {placesToVisit.map((place) => (
+              <Detail content={place} />
+            ))}
           </div>
         </div>
-        <div className="flex">
+        <div className="flex my-4">
           <Detail
             content={`${days} Days - ${nights} Nights`}
             icon={<FaCalendarDays />}

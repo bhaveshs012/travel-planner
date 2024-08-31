@@ -1,9 +1,32 @@
 import React from "react";
 import { ExpenseTrackerGraphs, TripWiseExpenseCard } from "./components";
-import tripWiseExpense from "./data/tripwiseExpense";
 import { PageHeader } from "../../components/index";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import ApiConstants from "../../constants/apiConstants";
 
 function ExpenseTracker() {
+  const fetchTripWiseExpenseData = async () => {
+    const response = await axios.get(
+      `${ApiConstants.baseUrl}/tripPlan/getTripExpenseSummaryForUser`,
+      { withCredentials: true }
+    );
+    console.log(response);
+    return response.data.data;
+  };
+
+  const {
+    data: tripwiseExpenseData,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["tripwiseExpense"],
+    queryFn: fetchTripWiseExpenseData,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <div className="p-8">
       <PageHeader
@@ -19,7 +42,7 @@ function ExpenseTracker() {
         </p>
         <div className="overflow-x-auto scroll-m-2">
           <div className="flex space-x-4">
-            {tripWiseExpense.map((expenseData, index) => (
+            {tripwiseExpenseData.map((expenseData, index) => (
               <TripWiseExpenseCard key={index} {...expenseData} />
             ))}
           </div>

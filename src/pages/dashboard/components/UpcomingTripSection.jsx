@@ -1,7 +1,7 @@
 import React from "react";
 import UpcomingTripSummaryCard from "./UpcomingTripSummaryCard";
 
-const UpcomingTripSection = () => {
+const UpcomingTripSection = ({ tripDetails }) => {
   return (
     <div className="space-y-2">
       <div>
@@ -12,13 +12,15 @@ const UpcomingTripSection = () => {
           image={
             "https://images.unsplash.com/photo-1545580492-8859ba8323f0?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
-          amount="2,00,000"
-          days={5}
-          nights={4}
-          tripStartDate={new Date("2024-09-21")}
-          description="HongKong is the greatest place to go during vacations"
-          title="HongKong"
-          people={4}
+          tripId={tripDetails.tripId}
+          amount={tripDetails.plannedBudget}
+          days={tripDetails.totalDays}
+          nights={tripDetails.totalNights}
+          tripStartDate={new Date(tripDetails.startDate)}
+          placesToVisit={tripDetails.placesToVisit}
+          description={tripDetails.tripDesc}
+          title={tripDetails.tripName}
+          people={tripDetails.totalMembers}
         />
       </div>
     </div>

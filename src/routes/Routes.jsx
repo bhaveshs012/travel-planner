@@ -1,0 +1,133 @@
+import {
+  About,
+  Contact,
+  Features,
+  Home,
+  Login,
+  Profile,
+  Signup,
+  Bookings,
+  ExpenseTracker,
+  CreatePlanStarterPage,
+  EditPlan,
+  TripwiseExpenseDetail,
+  Discover,
+  PageNotFound,
+  Dashboard,
+} from "../pages/index";
+import ProtectedRoute from "../wrappers/ProtectedRoute";
+import Layout from "../Layout";
+import { createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "features",
+        element: <Features />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+    ],
+  },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/expenses",
+    element: <ExpenseTracker />,
+  },
+  {
+    path: "/plan",
+    children: [
+      {
+        path: "create",
+        element: (
+          <ProtectedRoute>
+            <CreatePlanStarterPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "edit",
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/:tripId",
+    children: [
+      {
+        path: "",
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "expenses",
+        element: (
+          <ProtectedRoute>
+            <TripwiseExpenseDetail />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/discover",
+    element: <Discover />,
+  },
+  {
+    path: "*", // This will catch all unmatched routes
+    element: <PageNotFound />,
+  },
+]);
+
+export default router;

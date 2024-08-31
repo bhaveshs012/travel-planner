@@ -38,7 +38,7 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(location.state?.from?.pathname || "/dashboard", {
+      navigate(location.state?.from?.pathname || "/login", {
         replace: true,
       });
     }
@@ -47,10 +47,11 @@ function Login() {
   const onSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
-      const response = await axios.post(`${ApiConstants.baseUrl}/users/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${ApiConstants.baseUrl}/users/login`,
+        { email, password },
+        { withCredentials: true } // Ensure cookies are sent with the request
+      );
       dispatch(login(response.data.data.user));
       navigate(fromRoute, { replace: true });
     } catch (error) {
