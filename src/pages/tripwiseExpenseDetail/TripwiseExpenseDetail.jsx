@@ -102,7 +102,7 @@ function TripwiseExpenseDetail() {
   };
   const {
     data: transactionData,
-    error: transacionError,
+    error: transactionError,
     isLoading: isTransactionLoading,
   } = useQuery({
     queryKey: ["fetchTransactions", tripId],
@@ -114,8 +114,20 @@ function TripwiseExpenseDetail() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (
+    isLoading ||
+    isAmountOwedByUserLoading ||
+    isAmountOwedToUserLoading ||
+    isTransactionLoading
+  )
+    return <div>Loading...</div>;
+  if (
+    error ||
+    amountOwedByUserError ||
+    amountOwedToUserError ||
+    transactionError
+  )
+    return <div>Error: {error.message}</div>;
   if (transactionData === undefined) return <div>Something messed up</div>;
 
   return (

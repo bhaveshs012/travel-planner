@@ -23,8 +23,8 @@ const TripSummaryCard = ({
         <div className="font-bold text-2xl overflow-auto">{tripName}</div>
         <p className="text-gray-700 text-base font-normal">{tripDesc}</p>
         <div className="flex-grow space-y-4">
-          {placesToVisit.map((place) => (
-            <Detail content={place} />
+          {placesToVisit.map((place, index) => (
+            <Detail key={index} content={place} />
           ))}
         </div>
       </div>

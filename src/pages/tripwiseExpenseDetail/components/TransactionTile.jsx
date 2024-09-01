@@ -21,7 +21,7 @@ function TransactionTile({
           <p className="text-sm font-medium text-gray-400 ">{description}</p>
           <div className="flex items-center gap-x-2 gap-y-4">
             <img
-              src="https://i.pravatar.cc/150?img=3"
+              src={paidBy.avatar}
               alt="Paid By"
               className="object-cover rounded-full h-8 w-8"
             />
@@ -31,7 +31,7 @@ function TransactionTile({
       </div>
       <div className="text-sm font-semibold">
         <p className="text-sm font-bold text-gray-500">Split Between</p>
-        <AvatarRow totalMembers={splitBetween.length} />
+        <AvatarRow members={splitBetween} />
       </div>
       <div className="px-4 py-2 bg-black text-white text-sm font-semibold rounded hover:bg-gray-900">
         {`${Intl.NumberFormat("en-IN", {

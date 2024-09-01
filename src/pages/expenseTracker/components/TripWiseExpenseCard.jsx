@@ -10,6 +10,7 @@ function TripWiseExpenseCard({
   totalMembers,
   placesToVisit,
   tripId,
+  tripMembers,
 }) {
   return (
     <div className="flex flex-shrink-0 w-1/2 shadow-lg cursor-pointer">
@@ -31,7 +32,7 @@ function TripWiseExpenseCard({
           ))}
         </div>
         <div>
-          <AvatarRow totalMembers={totalMembers} />
+          <AvatarRow members={tripMembers} />
         </div>
       </div>
       <div className="flex flex-col w-1/2 p-4 space-y-8 rounded-tr-lg rounded-br-lg bg-black text-white justify-center items-center text-center">

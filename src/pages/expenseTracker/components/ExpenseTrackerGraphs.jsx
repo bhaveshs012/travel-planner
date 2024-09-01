@@ -74,7 +74,6 @@ const ExpenseTrackerGraphs = () => {
   const filteredMonthWiseData = useMemo(() => {
     if (!monthwiseData) return null;
     const data = convertMonthDataForSelectedYear(monthwiseData, selectedYear);
-    console.log("Filtered Month Wise Data:", data);
     return data;
   }, [monthwiseData, selectedYear]);
 
@@ -84,7 +83,6 @@ const ExpenseTrackerGraphs = () => {
       categoryWiseData,
       selectedYear
     );
-    console.log("Filtered Category Wise Data:", data);
     return data;
   }, [categoryWiseData, selectedYear]);
 

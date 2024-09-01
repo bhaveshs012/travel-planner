@@ -3,6 +3,7 @@ import Detail from "../../../components/TripSummaryCard/Detail";
 import { FaBolt, FaCalendarDays } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa6";
+import { stringToDateConverter } from "../../../utils/stringToDateConverter";
 
 const TripSummaryCardHorizontal = ({
   image,
@@ -26,11 +27,7 @@ const TripSummaryCardHorizontal = ({
             <div className="flex space-x-4 items-center justify-center">
               <FaBolt className="text-yellow-400" />
               <p className="font-medium text-md">
-                {tripStartDate.toLocaleString("en-US", {
-                  year: "numeric", // e.g., "2024"
-                  month: "short", // e.g., "August"
-                  day: "numeric", // e.g., "31"
-                })}
+                {stringToDateConverter(tripStartDate)}
               </p>
             </div>
           </div>

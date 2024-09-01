@@ -11,7 +11,6 @@ function ExpenseTracker() {
       `${ApiConstants.baseUrl}/tripPlan/getTripExpenseSummaryForUser`,
       { withCredentials: true }
     );
-    console.log(response);
     return response.data.data;
   };
 

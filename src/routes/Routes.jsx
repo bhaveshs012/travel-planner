@@ -18,6 +18,7 @@ import {
 import ProtectedRoute from "../wrappers/ProtectedRoute";
 import Layout from "../Layout";
 import { createBrowserRouter } from "react-router-dom";
+import DashBoardMainContent from "../pages/dashboard/components/DashBoardMainContent";
 
 const router = createBrowserRouter([
   {
@@ -50,14 +51,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/profile",
-    element: (
-      <ProtectedRoute>
-        <Profile />
-      </ProtectedRoute>
-    ),
-  },
+
   {
     path: "/dashboard",
     element: (
@@ -65,48 +59,12 @@ const router = createBrowserRouter([
         <Dashboard />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: "/expenses",
-    element: <ExpenseTracker />,
-  },
-  {
-    path: "/plan",
-    children: [
-      {
-        path: "create",
-        element: (
-          <ProtectedRoute>
-            <CreatePlanStarterPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "edit",
-        element: (
-          <ProtectedRoute>
-            <EditPlan />
-          </ProtectedRoute>
-        ),
-      },
-    ],
-  },
-  {
-    path: "/:tripId",
     children: [
       {
         path: "",
         element: (
           <ProtectedRoute>
-            <EditPlan />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "bookings",
-        element: (
-          <ProtectedRoute>
-            <Bookings />
+            <DashBoardMainContent />
           </ProtectedRoute>
         ),
       },
@@ -114,16 +72,73 @@ const router = createBrowserRouter([
         path: "expenses",
         element: (
           <ProtectedRoute>
-            <TripwiseExpenseDetail />
+            <ExpenseTracker />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "discover",
+        element: (
+          <ProtectedRoute>
+            <Discover />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },
   {
-    path: "/discover",
-    element: <Discover />,
+    path: "/plan",
+    element: (
+      <ProtectedRoute>
+        {/* A wrapper component for plan routes if needed */}
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "create",
+        element: <CreatePlanStarterPage />,
+      },
+      {
+        path: "edit",
+        element: <EditPlan />,
+      },
+    ],
   },
+  {
+    path: "/:tripId",
+    element: (
+      <ProtectedRoute>
+        {/* A wrapper component for trip-specific routes if needed */}
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "",
+        element: <EditPlan />,
+      },
+      {
+        path: "bookings",
+        element: <Bookings />,
+      },
+      {
+        path: "expenses",
+        element: <TripwiseExpenseDetail />,
+      },
+    ],
+  },
+
   {
     path: "*", // This will catch all unmatched routes
     element: <PageNotFound />,

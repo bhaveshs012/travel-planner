@@ -21,6 +21,7 @@ function SideBar({ sideBarOpen, handleToggleSideBar, sideBarLinks }) {
             title={link.name}
             sideBarOpen={sideBarOpen}
             icon={link.icon}
+            path={link.path}
           />
         ))}
       </div>
