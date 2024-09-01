@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { MainContentSpace } from "./components";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import SideBar from "../../../components/SideBarComponent/SideBar";
-import { sideBarLinks } from "./data/sidebarLinks";
-
-function EditPlan() {
+import { SideBar } from "../../components";
+import { sideBarLinks } from "./data/dashboardSidebarLinks";
+import { Outlet } from "react-router-dom";
+const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { tripId } = useParams();
-  const navigate = useNavigate();
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -25,10 +21,10 @@ function EditPlan() {
           isSidebarOpen ? "w-3/4" : "w-full"
         } h-full overflow-auto`}
       >
-        <MainContentSpace />
+        <Outlet />
       </div>
     </div>
   );
-}
+};
 
-export default EditPlan;
+export default Dashboard;

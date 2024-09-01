@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -9,6 +9,13 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ApiConstants from "../../../constants/apiConstants";
+import {
+  convertCategoryDataForSelectedYear,
+  convertMonthDataForSelectedYear,
+} from "../utils/dataConvertor";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 ChartJS.register(
   BarElement,
@@ -20,77 +27,76 @@ ChartJS.register(
 );
 
 const ExpenseTrackerGraphs = () => {
-  const [selectedYear, setSelectedYear] = useState("2024");
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   const handleYearChange = (e) => {
+    const newYear = parseInt(e.target.value, 10);
+    console.log("Year changed to:", newYear);
     setSelectedYear(e.target.value);
   };
 
-  const monthwiseData = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "Expenses",
-        data:
-          selectedYear === "2024"
-            ? [
-                1200, 1500, 800, 1600, 1900, 2100, 1500, 2000, 2200, 1700, 1800,
-                1600,
-              ]
-            : [
-                1000, 1400, 900, 1500, 1800, 2000, 1400, 1900, 2100, 1600, 1700,
-                1500,
-              ],
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
+  //* Get Entire Data for Every Year ::
+  const fetchMonthWiseSpendingForYear = async () => {
+    const response = await axios.get(
+      `${ApiConstants.baseUrl}/expenses/getMonthWiseExpenses`,
+      { withCredentials: true }
+    );
+    return response.data.data;
   };
 
-  const categorywiseData = {
-    labels: [
-      "Travel",
-      "Accommodation",
-      "Food",
-      "Entertainment",
-      "Miscellaneous",
-    ],
-    datasets: [
-      {
-        label: "Expenses",
-        data: [4000, 2500, 3000, 1500, 800],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
+  const fetchCategoryWiseSpendingForYear = async () => {
+    const response = await axios.get(
+      `${ApiConstants.baseUrl}/expenses/getCategoryWiseExpenses`,
+      { withCredentials: true }
+    );
+    return response.data.data;
   };
+
+  const {
+    data: monthwiseData,
+    error: monthwiseDataError,
+    isLoading: isMonthwiseLoading,
+  } = useQuery({
+    queryKey: ["monthWiseSpending"],
+    queryFn: fetchMonthWiseSpendingForYear,
+  });
+
+  const {
+    data: categoryWiseData,
+    error: categoryDataError,
+    isLoading: isCategoryWiseLoading,
+  } = useQuery({
+    queryKey: ["categoryWiseSpending"],
+    queryFn: fetchCategoryWiseSpendingForYear,
+  });
+
+  //* Filter out the data only for the selected year
+  const filteredMonthWiseData = useMemo(() => {
+    if (!monthwiseData) return null;
+    const data = convertMonthDataForSelectedYear(monthwiseData, selectedYear);
+    return data;
+  }, [monthwiseData, selectedYear]);
+
+  const filteredCategoryWiseData = useMemo(() => {
+    if (!categoryWiseData) return null;
+    const data = convertCategoryDataForSelectedYear(
+      categoryWiseData,
+      selectedYear
+    );
+    return data;
+  }, [categoryWiseData, selectedYear]);
+
+  if (isMonthwiseLoading || isCategoryWiseLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (monthwiseDataError || categoryDataError) {
+    return (
+      <div>
+        Error: {monthwiseDataError?.message || categoryDataError?.message}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col p-4 space-y-8">
@@ -102,23 +108,39 @@ const ExpenseTrackerGraphs = () => {
         >
           <option value="2023">2023</option>
           <option value="2024">2024</option>
+          <option value="2025">2025</option>
         </select>
       </div>
       <div className="flex flex-row space-x-8 w-full">
         <div className="w-1/2" style={{ height: "250px" }}>
-          <Bar data={monthwiseData} options={{ maintainAspectRatio: false }} />
-          <p className="text-center text-md my-4 font-semibold mb-4">
-            Monthwise Spending
-          </p>
+          {filteredMonthWiseData ? (
+            <>
+              <Bar
+                data={filteredMonthWiseData}
+                options={{ maintainAspectRatio: false }}
+              />
+              <p className="text-center text-md my-4 font-semibold mb-4">
+                Monthwise Spending
+              </p>
+            </>
+          ) : (
+            <p>No data available for Monthwise Spending</p>
+          )}
         </div>
         <div className="w-1/2" style={{ height: "250px" }}>
-          <Pie
-            data={categorywiseData}
-            options={{ maintainAspectRatio: false }}
-          />
-          <p className="text-center text-md my-4 font-semibold mb-4">
-            Categorywise Spending
-          </p>
+          {filteredCategoryWiseData ? (
+            <>
+              <Pie
+                data={filteredCategoryWiseData}
+                options={{ maintainAspectRatio: false }}
+              />
+              <p className="text-center text-md my-4 font-semibold mb-4">
+                Categorywise Spending
+              </p>
+            </>
+          ) : (
+            <p>No data available for Categorywise Spending</p>
+          )}
         </div>
       </div>
     </div>

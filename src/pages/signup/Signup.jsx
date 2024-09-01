@@ -1,12 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {
-  Input,
-  Button,
-  AvatarInput,
-  PhoneNumberInput,
-} from "../../components/Form";
+import { Input, Button, AvatarInput } from "../../components/Form";
 import { PageHeader } from "../../components";
 import ApiConstants from "../../constants/apiConstants";
 import { useState, useEffect } from "react";

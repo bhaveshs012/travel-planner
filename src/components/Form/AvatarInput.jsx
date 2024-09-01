@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import AvatarPlaceholder from "../../assets/avatarPlaceholder.png";
 
-const AvatarInput = ({ register }) => {
+const AvatarInput = ({ register, userImage }) => {
   const [avatar, setAvatar] = useState(null);
   const fileInputRef = useRef(null);
   const placeholderImage = AvatarPlaceholder; // Placeholder image URL
@@ -37,7 +37,7 @@ const AvatarInput = ({ register }) => {
             ref={fileInputRef}
           />
           <img
-            src={avatar || placeholderImage}
+            src={userImage || avatar || placeholderImage}
             alt="Avatar"
             className="w-full h-full object-cover"
           />

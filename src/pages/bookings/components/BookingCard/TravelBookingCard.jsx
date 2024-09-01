@@ -7,6 +7,8 @@ import {
   FaClock,
   FaArrowRightLong,
 } from "react-icons/fa6";
+import { stringToDateConverter } from "../../../../utils/stringToDateConverter";
+import { calculateTravelHours } from "../../../../utils/calculateTravelHours";
 
 function TravelBookingCard({
   travelType,
@@ -16,7 +18,7 @@ function TravelBookingCard({
   departureTime,
   arrivalDate,
   arrivalTime,
-  travelHours,
+  bookingReceipt,
   location,
 }) {
   const getIcon = () => {
@@ -53,25 +55,35 @@ function TravelBookingCard({
             <FaCalendarDays />
             <p>
               <span className="font-semibold">Departure:</span>{" "}
-              {`${departureDate} -> ${departureTime}`}
+              {`${stringToDateConverter(departureDate)}  ${departureTime}`}
             </p>
           </div>
           <div className="flex my-2 gap-1 items-center text-sm text-gray-600">
             <FaCalendarDays />
             <p>
               <span className="font-semibold">Arrival:</span>{" "}
-              {`${arrivalDate} -> ${arrivalTime}`}
+              {`${stringToDateConverter(arrivalDate)}  ${arrivalTime}`}
             </p>
           </div>
 
           <div className="flex gap-1 items-center text-sm text-gray-600">
             <FaClock />
-            <p>{travelHours} hours</p>
+            <p>
+              {calculateTravelHours(
+                departureDate,
+                departureTime,
+                arrivalDate,
+                arrivalTime
+              )}{" "}
+              hours
+            </p>
           </div>
         </div>
       </div>
       <button className="px-4 py-2 bg-black text-white text-sm font-semibold rounded hover:bg-gray-900">
-        View PDF
+        <a href={bookingReceipt} target="_blank" rel="noopener noreferrer">
+          View PDF
+        </a>
       </button>
     </div>
   );

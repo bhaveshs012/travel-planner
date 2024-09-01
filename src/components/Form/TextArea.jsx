@@ -4,7 +4,7 @@ const TextArea = ({ name, label, placeholder, maxLength = 500, rows = 5 }) => {
   const id = useId();
   return (
     <div className="mb-4">
-      <label htmlFor={name} className="block text-sm font-bold mb-2">
+      <label htmlFor={name} className="block text-md font-bold mb-2">
         {label}
       </label>
       <textarea

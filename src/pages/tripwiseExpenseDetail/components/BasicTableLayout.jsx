@@ -21,10 +21,10 @@ function BasicTableLayout({ heading, data }) {
             {data.data.map((item, index) => (
               <tr key={index} className="bg-white even:bg-gray-100">
                 <td className="px-4 py-2 border border-gray-200">
-                  {item.name}
+                  {item.fullName}
                 </td>
                 <td className="px-4 py-2 border border-gray-200">
-                  {convertToINR(item.amount)}
+                  {convertToINR(item.totalAmount)}
                 </td>
               </tr>
             ))}
