@@ -2,14 +2,12 @@ import React from "react";
 import { ExpenseTrackerGraphs, TripWiseExpenseCard } from "./components";
 import { PageHeader } from "../../components/index";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import ApiConstants from "../../constants/apiConstants";
+import apiClient from "../../api/apiClient";
 
 function ExpenseTracker() {
   const fetchTripWiseExpenseData = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/tripPlan/getTripExpenseSummaryForUser`,
-      { withCredentials: true }
+    const response = await apiClient.get(
+      "/tripPlan/getTripExpenseSummaryForUser"
     );
     return response.data.data;
   };

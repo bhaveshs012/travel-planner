@@ -3,16 +3,12 @@ import TopBar from "./TopBar";
 import UpcomingTripSection from "./UpcomingTripSection";
 import UserCreatedTripsSection from "./UserCreatedTripsSection";
 import UserJoinedTripsSection from "./UserJoinedTripsSection";
-import ApiConstants from "../../../constants/apiConstants";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../../../api/apiClient";
 
 const DashBoardMainContent = () => {
   const fetchDashboardTripSummary = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/tripPlan/getTripDashboardSummary`,
-      { withCredentials: true }
-    );
+    const response = await apiClient.get(`/tripPlan/getTripDashboardSummary`);
     return response.data.data;
   };
 

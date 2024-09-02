@@ -1,10 +1,8 @@
 import React from "react";
 import { HotelBookingCard, TravelBookingCard } from "./components";
 import { PageHeader } from "../../components";
-import bookings from "./data/bookings";
 import { FaPlus } from "react-icons/fa6";
-import axios from "axios";
-import ApiConstants from "../../constants/apiConstants";
+import apiClient from "../../api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -12,12 +10,7 @@ function Bookings() {
   const { tripId } = useParams();
 
   const fetchAllBookings = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/bookings/${tripId}/getBookings`,
-      { withCredentials: true }
-    );
-    console.log("Bookings Data", response.data.data);
-
+    const response = await apiClient.get(`/bookings/${tripId}/getBookings`);
     return response.data.data;
   };
 
@@ -29,8 +22,11 @@ function Bookings() {
     queryKey: ["tripBookings"],
     queryFn: fetchAllBookings,
   });
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+
+  console.log("Bookings Data: ", tripBookingsData);
 
   return (
     <div className="w-screen p-8">

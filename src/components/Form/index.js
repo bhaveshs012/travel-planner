@@ -3,4 +3,5 @@ import Button from "./Button";
 import TextArea from "./TextArea";
 import AvatarInput from "./AvatarInput";
 import PhoneNumberInput from "./PhoneNumberInput";
-export { Input, Button, TextArea, AvatarInput, PhoneNumberInput };
+import Select from "./Select";
+export { Input, Button, TextArea, AvatarInput, PhoneNumberInput, Select };

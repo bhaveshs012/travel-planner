@@ -6,19 +6,15 @@ import { FaFilter } from "react-icons/fa6";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ButtonWithIcon, SmallFilledButton } from "../../components/Buttons";
-import ApiConstants from "../../constants/apiConstants";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../../api/apiClient";
 
 function TripwiseExpenseDetail() {
   const { tripId } = useParams();
 
   //* Trip Expense Summary
   const fetchTripSummary = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/tripPlan/${tripId}/getSummary`,
-      { withCredentials: true }
-    );
+    const response = await apiClient.get(`/tripPlan/${tripId}/getSummary`);
     return response.data.data;
   };
 
@@ -33,9 +29,8 @@ function TripwiseExpenseDetail() {
 
   //* Contribution and Split Summary
   const getAmountOwedByUser = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/expenses/${tripId}/getAmountOwedByUser`,
-      { withCredentials: true }
+    const response = await apiClient.get(
+      `/expenses/${tripId}/getAmountOwedByUser`
     );
     return {
       heading: ["Name", "Amount Owed"],
@@ -54,8 +49,7 @@ function TripwiseExpenseDetail() {
 
   const getAmountOwedToTheUser = async () => {
     const response = await axios.get(
-      `${ApiConstants.baseUrl}/expenses/${tripId}/getAmountOwedToTheUser`,
-      { withCredentials: true }
+      `/expenses/${tripId}/getAmountOwedToTheUser`
     );
     return {
       heading: ["Name", "Amount Owed"],
@@ -74,8 +68,7 @@ function TripwiseExpenseDetail() {
 
   const getAmountContributedByEachUser = async () => {
     const response = await axios.get(
-      `${ApiConstants.baseUrl}/expenses/${tripId}/getAmountContributedByEachUser`,
-      { withCredentials: true }
+      `/expenses/${tripId}/getAmountContributedByEachUser`
     );
     return {
       heading: ["Name", "Amount Contributed"],
@@ -94,10 +87,7 @@ function TripwiseExpenseDetail() {
 
   //* Transaction History
   const fetchTransactions = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/expenses/${tripId}/getTripExpenses`,
-      { withCredentials: true }
-    );
+    const response = await axios.get(`/expenses/${tripId}/getTripExpenses`);
     return response.data.data;
   };
   const {

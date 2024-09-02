@@ -19,6 +19,7 @@ import ProtectedRoute from "../wrappers/ProtectedRoute";
 import Layout from "../Layout";
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardMainContent from "../pages/dashboard/components/DashBoardMainContent";
+import AddBookingModal from "../components/Modals/AddBookingModal";
 
 const router = createBrowserRouter([
   {
@@ -118,27 +119,37 @@ const router = createBrowserRouter([
   },
   {
     path: "/:tripId",
-    element: (
-      <ProtectedRoute>
-        {/* A wrapper component for trip-specific routes if needed */}
-      </ProtectedRoute>
-    ),
     children: [
       {
         path: "",
-        element: <EditPlan />,
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "bookings",
-        element: <Bookings />,
+        element: (
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "expenses",
-        element: <TripwiseExpenseDetail />,
+        element: (
+          <ProtectedRoute>
+            <TripwiseExpenseDetail />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
-
+  {
+    path: "/addBooking",
+    element: <AddBookingModal />,
+  },
   {
     path: "*", // This will catch all unmatched routes
     element: <PageNotFound />,
