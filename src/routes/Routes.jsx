@@ -19,7 +19,6 @@ import ProtectedRoute from "../wrappers/ProtectedRoute";
 import Layout from "../Layout";
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardMainContent from "../pages/dashboard/components/DashBoardMainContent";
-import AddBookingModal from "../components/Modals/AddBookingModal";
 
 const router = createBrowserRouter([
   {
@@ -145,10 +144,6 @@ const router = createBrowserRouter([
         ),
       },
     ],
-  },
-  {
-    path: "/addBooking",
-    element: <AddBookingModal />,
   },
   {
     path: "*", // This will catch all unmatched routes
