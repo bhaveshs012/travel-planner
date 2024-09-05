@@ -100,7 +100,7 @@ function TripwiseExpenseDetail() {
     error: transactionError,
     isLoading: isTransactionLoading,
   } = useQuery({
-    queryKey: ["fetchTransactions", tripId],
+    queryKey: ["fetchTransactions", tripId, handleOpenModal],
     queryFn: fetchTransactions,
   });
 
