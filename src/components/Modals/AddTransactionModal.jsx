@@ -6,10 +6,11 @@ import React, {
 } from "react";
 import { Button, Select, Input } from "../Form";
 import { useForm } from "react-hook-form";
-import MainComponent from "../UserSearchBar/MainComponent";
-import { useSelector } from "react-redux";
+import MainComponent from "../TripMemberSearchBar/MainComponent";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import apiClient from "../../api/apiClient";
+import { resetSplitBetween } from "../../features/splitBetweenSlice";
 
 const AddTransactionModal = forwardRef(({ tripId }, ref) => {
   //* States
@@ -17,6 +18,7 @@ const AddTransactionModal = forwardRef(({ tripId }, ref) => {
 
   //* Redux States
   const splitBetween = useSelector((state) => state.splitBetween);
+  const dispatch = useDispatch();
 
   useImperativeHandle(ref, () => ({
     openModal: () => dialogRef.current.showModal(),
@@ -28,6 +30,7 @@ const AddTransactionModal = forwardRef(({ tripId }, ref) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -45,6 +48,8 @@ const AddTransactionModal = forwardRef(({ tripId }, ref) => {
         `/expenses/${tripId}/addExpense`,
         finalData
       );
+      dispatch(resetSplitBetween());
+      reset();
       dialogRef.current.close();
     } catch (error) {
       toast.error(error.message);
@@ -61,7 +66,11 @@ const AddTransactionModal = forwardRef(({ tripId }, ref) => {
             <Button
               className="items-end w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900"
               type="button"
-              onClick={() => dialogRef.current.close()}
+              onClick={() => {
+                dispatch(resetSplitBetween());
+                dialogRef.current.close();
+                reset();
+              }}
               disabled={isLoading}
             >
               Close

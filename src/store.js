@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import authReducer from "./features/authSlice.js";
 import splitBetweenReducer from "./features/splitBetweenSlice.js";
+import triPlanReducer from "./features/tripPlanSlice.js";
 
 // Step 1: Create a persist configuration
 const persistConfig = {
@@ -19,6 +20,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer, // Use the persisted reducer
     splitBetween: splitBetweenReducer,
+    tripPlan: triPlanReducer,
   },
 });
 

@@ -1,25 +1,27 @@
 import React, { useState } from "react";
-import UsersDisplay from "./UsersDisplay";
-import SearchBar from "./SearchBar";
-import SearchList from "./SearchList";
 import useDebounce from "../../hooks/useDebounce";
+import UsersDisplay from "./UsersDisplay";
+import UserSearchBar from "./UserSearchBar";
+import UserSearchList from "./UserSearchList";
 
-const MainComponent = ({ tripId = "66c0fb22564716f8e4c55f9f" }) => {
+const UserSearchMainComponent = () => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 500);
-
   return (
     <div className="p-6">
       <div className="flex flex-col h-full w-full justify-center items-center space-y-6">
         <p className="text-md underline font-bold text-center">
-          Expense Split Between
+          Invite Trip Members
         </p>
         <UsersDisplay />
-        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-        <SearchList searchTerm={debouncedValue} tripId={tripId} />
+        <UserSearchBar
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+        <UserSearchList searchTerm={debouncedValue} />
       </div>
     </div>
   );
 };
 
-export default MainComponent;
+export default UserSearchMainComponent;

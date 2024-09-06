@@ -100,19 +100,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/plan",
-    element: (
-      <ProtectedRoute>
-        {/* A wrapper component for plan routes if needed */}
-      </ProtectedRoute>
-    ),
     children: [
       {
         path: "create",
-        element: <CreatePlanStarterPage />,
+        element: (
+          <ProtectedRoute>
+            <CreatePlanStarterPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "edit",
-        element: <EditPlan />,
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

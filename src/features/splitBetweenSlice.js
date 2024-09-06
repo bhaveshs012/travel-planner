@@ -1,4 +1,3 @@
-// tripMembersSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const splitBetweenSlice = createSlice({
@@ -12,12 +11,17 @@ const splitBetweenSlice = createSlice({
     },
     removeTripMember(state, action) {
       //* Removing Based on the id's objects cannot be matched like normal strings and numbers
-      const updatedSet = new Set(state.map((member) => member.id));
-      updatedSet.delete(action.payload.id);
+      const updatedSet = new Set(
+        state.filter((member) => member.userId !== action.payload.userId)
+      );
       return [...updatedSet];
+    },
+    resetSplitBetween(state, _) {
+      return [];
     },
   },
 });
 
-export const { addTripMember, removeTripMember } = splitBetweenSlice.actions;
+export const { addTripMember, removeTripMember, resetSplitBetween } =
+  splitBetweenSlice.actions;
 export default splitBetweenSlice.reducer;
