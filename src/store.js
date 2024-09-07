@@ -22,6 +22,10 @@ export const store = configureStore({
     splitBetween: splitBetweenReducer,
     tripPlan: triPlanReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 // Step 4: Export the persistor

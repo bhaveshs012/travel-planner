@@ -16,11 +16,26 @@ const tripPlanSlice = createSlice({
   name: "tripPlan",
   initialState,
   reducers: {
+    setTripPlan(state, action) {
+      return { ...state, ...action.payload };
+    },
     setInitialData(state, action) {
       state.tripName = action.payload.tripName;
       state.tripDesc = action.payload.tripDesc;
       state.startDate = action.payload.startDate;
       state.endDate = action.payload.endDate;
+    },
+    setTripName(state, action) {
+      state.tripName = action.payload;
+    },
+    setTripDesc(state, action) {
+      state.tripDesc = action.payload;
+    },
+    setStartDate(state, action) {
+      state.startDate = action.payload;
+    },
+    setEndDate(state, action) {
+      state.endDate = action.payload;
     },
     // Set notes
     setNotes(state, action) {
@@ -60,7 +75,12 @@ const tripPlanSlice = createSlice({
 });
 
 export const {
+  setTripPlan,
   setInitialData,
+  setTripName,
+  setTripDesc,
+  setStartDate,
+  setEndDate,
   setNotes,
   setCoverImage,
   setItinerary,

@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { setInitialData } from "../../../features/tripPlanSlice";
 import { InviteUserModal } from "../../../components/index";
+import apiClient from "../../../api/apiClient";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function CreatePlanStarterPage() {
   //* React Hook Form Setup
@@ -13,6 +16,7 @@ function CreatePlanStarterPage() {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm({
     defaultValues: {
       startDate: new Date().toLocaleString("en-US", {
@@ -41,7 +45,10 @@ function CreatePlanStarterPage() {
   //* For Loaders:
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = ({ tripName, tripDesc, startDate, endDate }) => {
+  //* Navigation
+  const navigate = useNavigate();
+
+  const onSubmit = async ({ tripName, tripDesc, startDate, endDate }) => {
     dispatch(
       setInitialData({
         tripName: tripName,
@@ -50,7 +57,39 @@ function CreatePlanStarterPage() {
         endDate: endDate,
       })
     );
-    console.log("Form Data: ", data);
+    try {
+      setIsLoading(true);
+      const tripMembersIds = tripMembers.map((tripMember) => tripMember.userId);
+      console.log("Form Data: ", {
+        tripName,
+        tripDesc,
+        startDate,
+        endDate,
+        tripMembers: tripMembersIds,
+      });
+      const response = await apiClient.post("/tripPlan/createTripPlan", {
+        tripName,
+        tripDesc,
+        startDate,
+        endDate,
+        tripMembers: tripMembersIds,
+      });
+      //* Reset the fields 
+      reset();
+      //* Get the trip Id
+      const tripId = response.data.data._id;
+      setTimeout(() => {
+        navigate(`/${tripId}`, { replace: true });
+        toast.success("Trip Plan Created Successfully !!");
+      }, 500);
+    } catch (error) {
+      if (error.response) {
+        const errorMessage = error.response.data.message || "An error occurred";
+        toast.error(errorMessage); // Display the error message in a toast
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -88,10 +127,9 @@ function CreatePlanStarterPage() {
               {...register("startDate", {
                 required: "Start Date is required",
                 validate: (value) => {
-                  return (
-                    value >= new Date() ||
-                    "Start Date cannot be before today !!"
-                  );
+                  if (value < new Date()) {
+                    return "Start Date should be greater than today !!";
+                  }
                 },
               })}
               error={errors.startDate?.message}
@@ -130,7 +168,9 @@ function CreatePlanStarterPage() {
             </div>
           </button>
           <div className="w-1/2">
-            <Button type="submit">Let's Start Planning !!</Button>
+            <Button type="submit" disabled={isLoading}>
+              {!isLoading ? "Let's Start Planning !!" : "Please Wait ..."}
+            </Button>
           </div>
         </div>
       </form>

@@ -25,7 +25,9 @@ function TransactionTile({
               alt="Paid By"
               className="object-cover rounded-full h-8 w-8"
             />
-            <p className="text-sm font-semibold text-gray-500">{paidBy.name}</p>
+            <p className="text-sm font-semibold text-gray-500">
+              {paidBy.name || paidBy.fullName}
+            </p>
           </div>
         </div>
       </div>

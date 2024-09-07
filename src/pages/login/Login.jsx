@@ -23,7 +23,7 @@ function Login() {
   const location = useLocation();
   const { error, isAuthenticated } = useSelector((state) => state.auth);
 
-  const fromRoute = location.state?.from?.pathname || "/";
+  const fromRoute = location.state?.from?.pathname || "/dashboard";
 
   //* Toasts for Errors
   let toastId = null;
@@ -36,7 +36,7 @@ function Login() {
   }, [error]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       navigate(location.state?.from?.pathname || "/login", {
         replace: true,
       });
