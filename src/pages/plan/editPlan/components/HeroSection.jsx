@@ -41,6 +41,7 @@ const HeroSection = () => {
   } = useQuery({
     queryKey: ["getTripDetailsById", tripId],
     queryFn: getTripDetailsById,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <div>Loading ...</div>;
@@ -48,7 +49,11 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-auto w-full">
-      <InviteUserModal ref={inviteUserModalRef} />
+      <InviteUserModal
+        ref={inviteUserModalRef}
+        fromTripDashboard={true}
+        tripId={tripId}
+      />
       <div className="h-auto w-full">
         <img
           src="https://i.natgeofe.com/n/8eba070d-14e5-4d07-8bab-9db774029063/93080.jpg?w=718&h=538"

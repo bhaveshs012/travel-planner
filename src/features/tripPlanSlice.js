@@ -51,13 +51,25 @@ const tripPlanSlice = createSlice({
     },
     // Add a trip member
     addTripMember(state, action) {
-      state.tripMembers.push(action.payload);
+      const newMember = action.payload;
+      // Check if the member with the same userId already exists
+      const memberExists = state.tripMembers.some(
+        (member) => member.userId === newMember.userId
+      );
+      // Add the new member only if they don't already exist in the array
+      if (!memberExists) {
+        state.tripMembers.push(newMember);
+      }
     },
     // Remove a trip member
     removeTripMember(state, action) {
       state.tripMembers = state.tripMembers.filter(
         (member) => member.userId !== action.payload.userId
       );
+    },
+    // Set Trip Members
+    setTripMembers(state, action) {
+      state.tripMembers = action.payload;
     },
     // Reset trip members
     resetTripMembers(state) {
@@ -86,6 +98,7 @@ export const {
   setItinerary,
   addTripMember,
   removeTripMember,
+  setTripMembers,
   resetTripMembers,
   setPlannedBudget,
   resetTripPlan,

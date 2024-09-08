@@ -60,13 +60,6 @@ function CreatePlanStarterPage() {
     try {
       setIsLoading(true);
       const tripMembersIds = tripMembers.map((tripMember) => tripMember.userId);
-      console.log("Form Data: ", {
-        tripName,
-        tripDesc,
-        startDate,
-        endDate,
-        tripMembers: tripMembersIds,
-      });
       const response = await apiClient.post("/tripPlan/createTripPlan", {
         tripName,
         tripDesc,
@@ -74,7 +67,7 @@ function CreatePlanStarterPage() {
         endDate,
         tripMembers: tripMembersIds,
       });
-      //* Reset the fields 
+      //* Reset the fields
       reset();
       //* Get the trip Id
       const tripId = response.data.data._id;
@@ -94,7 +87,7 @@ function CreatePlanStarterPage() {
 
   return (
     <>
-      <InviteUserModal ref={inviteUserModalRef} />
+      <InviteUserModal ref={inviteUserModalRef} fromTripDashboard={false} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="h-svh p-8 space-y-4 flex flex-col justify-center items-center">
           <p className="text-3xl font-bold">Plan a New Trip</p>
