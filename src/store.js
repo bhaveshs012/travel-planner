@@ -9,7 +9,7 @@ import triPlanReducer from "./features/tripPlanSlice.js";
 const persistConfig = {
   key: "auth", // Key for the persisted state
   storage, // Storage engine to use (localStorage here)
-  whitelist: ["user", "isAuthenticated"], // Only persist specific parts of the state
+  whitelist: ["isAuthenticated"], // Only persist specific parts of the state
 };
 
 // Step 2: Wrap the authReducer with persistReducer

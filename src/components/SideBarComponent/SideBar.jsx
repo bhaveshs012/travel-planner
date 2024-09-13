@@ -9,6 +9,7 @@ function SideBar({
   sideBarLinks,
   CTA,
   CTAFunction,
+  tripId,
 }) {
   return (
     <div
@@ -30,6 +31,15 @@ function SideBar({
               sideBarOpen={sideBarOpen}
               icon={link.icon}
               path={link.path}
+              handleScroll={
+                link.ref
+                  ? () =>
+                      link.ref.current.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                  : null
+              }
+              tripId={tripId}
             />
           ))}
         </div>

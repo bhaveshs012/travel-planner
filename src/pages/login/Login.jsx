@@ -25,7 +25,7 @@ function Login() {
 
   const fromRoute = location.state?.from?.pathname || "/dashboard";
 
-  //* Toasts for Errors
+  // //* Toasts for Errors
   let toastId = null;
   useEffect(() => {
     if (error) {
@@ -36,14 +36,17 @@ function Login() {
   }, [error]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate(location.state?.from?.pathname || "/login", {
-        replace: true,
-      });
+    if (isAuthenticated && location.pathname === "/login") {
+      navigate(fromRoute, { replace: true });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate, location.pathname, fromRoute]);
 
   const onSubmit = async ({ email, password }) => {
+    if (isAuthenticated) {
+      // If the user is already authenticated, no need to log in again
+      navigate(fromRoute, { replace: true });
+      return;
+    }
     try {
       setIsLoading(true);
       const response = await apiClient.post("/users/login", {

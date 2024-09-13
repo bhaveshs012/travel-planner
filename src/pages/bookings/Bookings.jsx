@@ -53,19 +53,27 @@ function Bookings() {
           </button>
         </div>
         <div className="space-y-4 ">
-          {tripBookingsData.bookings.map((booking, index) =>
-            booking.bookingType === "travel" ? (
-              <TravelBookingCard
-                key={index}
-                {...booking.bookingDetails}
-                bookingReceipt={booking.bookingReceipt}
-              />
-            ) : (
-              <HotelBookingCard
-                key={index}
-                {...booking.bookingDetails}
-                bookingReceipt={booking.bookingReceipt}
-              />
+          {tripBookingsData.bookings.length === 0 ? (
+            <div className="text-center p-4">
+              <p className="text-md text-gray-400">
+                No Bookings Added !! Save some Booking Details to view later 😁
+              </p>
+            </div>
+          ) : (
+            tripBookingsData.bookings.map((booking, index) =>
+              booking.bookingType === "travel" ? (
+                <TravelBookingCard
+                  key={index}
+                  {...booking.bookingDetails}
+                  bookingReceipt={booking.bookingReceipt}
+                />
+              ) : (
+                <HotelBookingCard
+                  key={index}
+                  {...booking.bookingDetails}
+                  bookingReceipt={booking.bookingReceipt}
+                />
+              )
             )
           )}
         </div>

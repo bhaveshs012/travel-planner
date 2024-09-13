@@ -6,7 +6,7 @@ import { FaRegCalendarDays } from "react-icons/fa6";
 import ChangeTripDatesModal from "../../../../components/Modals/ChangeTripDatesModal";
 import { setInitialItinerary } from "../../../../features/tripPlanSlice";
 
-function ItinerarySection() {
+const ItinerarySection = React.forwardRef(({ props }, ref) => {
   const itineraryList = useSelector((state) => state.tripPlan.itinerary);
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ function ItinerarySection() {
   };
 
   return (
-    <section className="grid gap-y-8">
+    <section className="grid gap-y-8" ref={ref} {...props}>
       <ChangeTripDatesModal ref={changeTripDatesModalRef} />
       <div className="flex justify-between items-center">
         <SectionHeading
@@ -53,6 +53,6 @@ function ItinerarySection() {
       </div>
     </section>
   );
-}
+});
 
 export default ItinerarySection;

@@ -1,5 +1,4 @@
 import React from "react";
-import tripDummyData from "../data/tripDummyData";
 import TripSummaryCard from "../../../components/TripSummaryCard/TripSummaryCard";
 
 const UserCreatedTripsSection = ({ tripDetails }) => {
