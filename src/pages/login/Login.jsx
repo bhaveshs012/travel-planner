@@ -1,13 +1,12 @@
 import React from "react";
 import { Input, Button } from "../../components/Form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { login, loginFailure } from "../../features/authSlice";
 import { useForm } from "react-hook-form";
-import ApiConstants from "../../constants/apiConstants";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import apiClient from "../../api/apiClient";
 
 function Login() {
   //* Pre requisites for React Hook Form
@@ -24,7 +23,7 @@ function Login() {
   const location = useLocation();
   const { error, isAuthenticated } = useSelector((state) => state.auth);
 
-  const fromRoute = location.state?.from?.pathname || "/";
+  const fromRoute = location.state?.from?.pathname || "/dashboard";
 
   //* Toasts for Errors
   let toastId = null;
@@ -37,7 +36,7 @@ function Login() {
   }, [error]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       navigate(location.state?.from?.pathname || "/login", {
         replace: true,
       });
@@ -47,12 +46,12 @@ function Login() {
   const onSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        `${ApiConstants.baseUrl}/users/login`,
-        { email, password },
-        { withCredentials: true } // Ensure cookies are sent with the request
-      );
+      const response = await apiClient.post("/users/login", {
+        email,
+        password,
+      });
       dispatch(login(response.data.data.user));
+      toast.success("User Logged In !!");
       navigate(fromRoute, { replace: true });
     } catch (error) {
       if (error.response) {

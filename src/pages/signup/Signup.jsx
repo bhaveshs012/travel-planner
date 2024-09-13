@@ -3,12 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Button, AvatarInput } from "../../components/Form";
 import { PageHeader } from "../../components";
-import ApiConstants from "../../constants/apiConstants";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { login, loginFailure } from "../../features/authSlice";
+import apiClient from "../../api/apiClient";
 
 function Signup() {
   const {
@@ -51,10 +50,7 @@ function Signup() {
       formData.append("password", password);
       formData.append("avatar", avatar);
 
-      const response = await axios.post(
-        `${ApiConstants.baseUrl}/users/register`,
-        formData
-      );
+      const response = await apiClient.post("users/register", formData);
       toast.success(response.data.message);
       dispatch(login(response.data.data.user));
     } catch (error) {

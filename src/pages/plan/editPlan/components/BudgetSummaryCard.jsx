@@ -3,15 +3,11 @@ import { FaRegMoneyBill1, FaMoneyBillTransfer } from "react-icons/fa6";
 import { ButtonWithIcon } from "../../../../components/Buttons";
 import { convertToINR } from "../../../../utils/currencyFormatter";
 
-function BudgetSummaryCard({
-  totalExpenses,
-  fixedBudget,
-  buttonsRequired = true,
-}) {
-  const getSpendingPercentage = (totalExpenses, fixedBudget) => {
+function BudgetSummaryCard({ tripExpenseSummaryForDashboard }) {
+  const getSpendingPercentage = () => {
     // Convert inputs to numbers
-    const expenses = Number(totalExpenses);
-    const budget = Number(fixedBudget);
+    const expenses = Number(tripExpenseSummaryForDashboard.totalExpenses);
+    const budget = Number(tripExpenseSummaryForDashboard.plannedBudget);
 
     // Handle division by zero and invalid numbers
     if (isNaN(expenses) || isNaN(budget) || budget === 0) {
@@ -30,24 +26,37 @@ function BudgetSummaryCard({
       <div className="flex flex-col gap-y-4">
         <div>
           <p className="text-lg">Expenses</p>
-          <p className="text-2xl font-bold">{convertToINR(totalExpenses)}</p>
+          <p className="text-2xl font-bold">
+            {convertToINR(tripExpenseSummaryForDashboard.totalExpenses)}
+          </p>
         </div>
         <div>
           <p className="text-lg">Planned Budget</p>
-          <p className="text-2xl font-bold">{convertToINR(fixedBudget)}</p>
+          <p className="text-2xl font-bold">
+            {convertToINR(tripExpenseSummaryForDashboard.plannedBudget)}
+          </p>
         </div>
         {/* Spending Indicator */}
         <div className="w-full bg-gray-200 rounded-full h-2.5">
           <div
             className="bg-black h-2.5 rounded-full"
-            style={{ width: getSpendingPercentage(totalExpenses, fixedBudget) }}
+            style={{
+              width: getSpendingPercentage(
+                tripExpenseSummaryForDashboard.totalExpenses,
+                tripExpenseSummaryForDashboard.plannedBudget
+              ),
+            }}
           ></div>
         </div>
-        {buttonsRequired && (
+        {
           <div className="flex space-x-4">
             <div>
               <ButtonWithIcon
-                title={fixedBudget !== 0 ? "Edit Budget" : "Set a Budget"}
+                title={
+                  tripExpenseSummaryForDashboard.plannedBudget !== 0
+                    ? "Edit Budget"
+                    : "Set a Budget"
+                }
                 icon={<FaRegMoneyBill1 />}
               />
             </div>
@@ -58,7 +67,7 @@ function BudgetSummaryCard({
               />
             </div>
           </div>
-        )}
+        }
       </div>
     </div>
   );

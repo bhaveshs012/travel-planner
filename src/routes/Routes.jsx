@@ -100,45 +100,46 @@ const router = createBrowserRouter([
   },
   {
     path: "/plan",
-    element: (
-      <ProtectedRoute>
-        {/* A wrapper component for plan routes if needed */}
-      </ProtectedRoute>
-    ),
     children: [
       {
         path: "create",
-        element: <CreatePlanStarterPage />,
-      },
-      {
-        path: "edit",
-        element: <EditPlan />,
+        element: (
+          <ProtectedRoute>
+            <CreatePlanStarterPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
   {
     path: "/:tripId",
-    element: (
-      <ProtectedRoute>
-        {/* A wrapper component for trip-specific routes if needed */}
-      </ProtectedRoute>
-    ),
     children: [
       {
         path: "",
-        element: <EditPlan />,
+        element: (
+          <ProtectedRoute>
+            <EditPlan />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "bookings",
-        element: <Bookings />,
+        element: (
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "expenses",
-        element: <TripwiseExpenseDetail />,
+        element: (
+          <ProtectedRoute>
+            <TripwiseExpenseDetail />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
-
   {
     path: "*", // This will catch all unmatched routes
     element: <PageNotFound />,
