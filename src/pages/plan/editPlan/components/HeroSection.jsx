@@ -1,13 +1,7 @@
 import React, { useRef } from "react";
 import { FaPersonCirclePlus, FaPencil } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setTripPlan,
-  setTripName,
-  setTripDesc,
-  setStartDate,
-  setEndDate,
-} from "../../../../features/tripPlanSlice";
+import { setTripPlan } from "../../../../features/tripPlanSlice";
 import apiClient from "../../../../api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";

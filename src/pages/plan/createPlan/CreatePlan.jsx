@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Input, Button, TextArea } from "../../../components/Form";
 import { FaUserPlus } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { InviteUserModal } from "../../../components/index";
 import apiClient from "../../../api/apiClient";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import formatDate from "../../../utils/formatDateForInput";
 
 function CreatePlanStarterPage() {
   //* React Hook Form Setup
@@ -19,16 +20,8 @@ function CreatePlanStarterPage() {
     reset,
   } = useForm({
     defaultValues: {
-      startDate: new Date().toLocaleString("en-US", {
-        year: "numeric", // e.g., "2024"
-        month: "short", // e.g., "August"
-        day: "numeric", // e.g., "31"
-      }),
-      endDate: new Date().toLocaleString("en-US", {
-        year: "numeric", // e.g., "2024"
-        month: "short", // e.g., "August"
-        day: "numeric", // e.g., "31"
-      }),
+      startDate: formatDate(new Date()),
+      endDate: formatDate(new Date()),
     },
   });
 
@@ -41,6 +34,7 @@ function CreatePlanStarterPage() {
   //* Redux ::
   const dispatch = useDispatch();
   const tripMembers = useSelector((state) => state.tripPlan.tripMembers);
+  const itinerary = useSelector((state) => state.tripPlan.itinerary);
 
   //* For Loaders:
   const [isLoading, setIsLoading] = useState(false);
@@ -51,12 +45,14 @@ function CreatePlanStarterPage() {
   const onSubmit = async ({ tripName, tripDesc, startDate, endDate }) => {
     dispatch(
       setInitialData({
-        tripName: tripName,
-        tripDesc: tripDesc,
-        startDate: startDate,
-        endDate: endDate,
+        tripName,
+        tripDesc,
+        startDate,
+        endDate,
       })
     );
+    //* Async operation Hence we need to wait till it completes
+
     try {
       setIsLoading(true);
       const tripMembersIds = tripMembers.map((tripMember) => tripMember.userId);
@@ -66,19 +62,17 @@ function CreatePlanStarterPage() {
         startDate,
         endDate,
         tripMembers: tripMembersIds,
+        itinerary: itinerary,
       });
-      //* Reset the fields
+
+      // Reset the form and handle navigation
       reset();
-      //* Get the trip Id
-      const tripId = response.data.data._id;
-      setTimeout(() => {
-        navigate(`/${tripId}`, { replace: true });
-        toast.success("Trip Plan Created Successfully !!");
-      }, 500);
+      navigate(`/${response.data.data._id}`, { replace: true });
+      toast.success("Trip Plan Created Successfully !!");
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message || "An error occurred";
-        toast.error(errorMessage); // Display the error message in a toast
+        toast.error(errorMessage);
       }
     } finally {
       setIsLoading(false);

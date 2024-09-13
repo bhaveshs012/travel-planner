@@ -119,8 +119,10 @@ function TripwiseExpenseDetail() {
     contributionDetailsLoading ||
     transactionError
   ) {
-    return <div>Error: </div>;
+    return <div>Error</div>;
   }
+
+  console.log("Data :: ", tripSummaryData);
 
   return (
     <div className="p-8 flex flex-col gap-y-8">
@@ -131,8 +133,7 @@ function TripwiseExpenseDetail() {
       />
       <div className="w-full">
         <BudgetSummaryCard
-          totalExpenses={tripSummaryData.totalExpenses}
-          fixedBudget={tripSummaryData.plannedBudget}
+          tripExpenseSummaryForDashboard={tripSummaryData}
           buttonsRequired={false}
         />
       </div>

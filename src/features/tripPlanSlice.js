@@ -8,7 +8,7 @@ const initialState = {
   startDate: new Date(),
   endDate: new Date(),
   itinerary: [],
-  tripMembers: [], // Ensure it's initialized as an empty array
+  tripMembers: [],
   plannedBudget: [],
 };
 
@@ -17,70 +17,139 @@ const tripPlanSlice = createSlice({
   initialState,
   reducers: {
     setTripPlan(state, action) {
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload }; // Spread current state and action payload
     },
     setInitialData(state, action) {
-      state.tripName = action.payload.tripName;
-      state.tripDesc = action.payload.tripDesc;
-      state.startDate = action.payload.startDate;
-      state.endDate = action.payload.endDate;
+      return {
+        ...state,
+        tripName: action.payload.tripName,
+        tripDesc: action.payload.tripDesc,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
+      };
     },
     setTripName(state, action) {
-      state.tripName = action.payload;
+      return { ...state, tripName: action.payload };
     },
     setTripDesc(state, action) {
-      state.tripDesc = action.payload;
+      return { ...state, tripDesc: action.payload };
     },
     setStartDate(state, action) {
-      state.startDate = action.payload;
+      return { ...state, startDate: action.payload };
     },
     setEndDate(state, action) {
-      state.endDate = action.payload;
+      return { ...state, endDate: action.payload };
     },
-    // Set notes
     setNotes(state, action) {
-      state.notes = action.payload;
+      return { ...state, notes: action.payload };
     },
-    // Set cover image
     setCoverImage(state, action) {
-      state.coverImage = action.payload;
+      return { ...state, coverImage: action.payload };
     },
-    // Set itinerary
-    setItinerary(state, action) {
-      state.itinerary = action.payload;
+    setInitialItinerary(state) {
+      let startDate = new Date(state.startDate);
+      let endDate = new Date(state.endDate);
+
+      let newItinerary = [];
+      for (
+        let currDate = new Date(startDate); // Clone the start date to avoid mutation
+        currDate <= endDate;
+        currDate.setDate(currDate.getDate() + 1)
+      ) {
+        const itineraryItem = {
+          date: new Date(currDate.valueOf()), // Create a new Date object
+          placeToVisit: "",
+          checklist: [],
+          notes: "",
+        };
+        newItinerary.push(itineraryItem);
+      }
+      return { ...state, itinerary: newItinerary };
     },
-    // Add a trip member
+    shiftItinerary(state) {
+      const startDate = state.startDate;
+      const endDate = state.endDate;
+      const numberOfDays = (endDate - startDate) / 86400000 + 1; // convert milliseconds to days and add +1
+      let newArray = Array(numberOfDays).fill({});
+      let index = 0;
+
+      // Create a copy of the startDate
+      let currDate = new Date(startDate);
+
+      for (index = 0; currDate <= endDate; index++) {
+        const prevData = state.itinerary;
+
+        if (index < numberOfDays && index < prevData.length) {
+          // get the old data
+          newArray[index] = {
+            ...prevData[index],
+            date: new Date(currDate.valueOf()), // New Date object
+          };
+        } else {
+          const itineraryItem = {
+            date: new Date(currDate.valueOf()), // Create a new Date object
+            placeToVisit: "",
+            checklist: [],
+            notes: "",
+          };
+          newArray[index] = itineraryItem;
+        }
+
+        // Increment the currDate for the next day
+        currDate.setDate(currDate.getDate() + 1);
+      }
+
+      return { ...state, itinerary: newArray };
+    },
+    setItineraryItemNote(state, action) {
+      const { index, notes } = action.payload;
+      return {
+        ...state,
+        itinerary: state.itinerary.map((item, idx) =>
+          idx === index ? { ...item, notes } : item
+        ),
+      };
+    },
+    setItineraryItemPlaceToVisit(state, action) {
+      const { index, placeToVisit } = action.payload;
+      return {
+        ...state,
+        itinerary: state.itinerary.map((item, idx) =>
+          idx === index ? { ...item, placeToVisit } : item
+        ),
+      };
+    },
     addTripMember(state, action) {
       const newMember = action.payload;
-      // Check if the member with the same userId already exists
       const memberExists = state.tripMembers.some(
         (member) => member.userId === newMember.userId
       );
-      // Add the new member only if they don't already exist in the array
       if (!memberExists) {
-        state.tripMembers.push(newMember);
+        return {
+          ...state,
+          tripMembers: [...state.tripMembers, newMember], // Add new member immutably
+        };
       }
+      return state;
     },
-    // Remove a trip member
     removeTripMember(state, action) {
-      state.tripMembers = state.tripMembers.filter(
-        (member) => member.userId !== action.payload.userId
-      );
+      return {
+        ...state,
+        tripMembers: state.tripMembers.filter(
+          (member) => member.userId !== action.payload.userId
+        ),
+      };
     },
-    // Set Trip Members
     setTripMembers(state, action) {
-      state.tripMembers = action.payload;
+      return { ...state, tripMembers: action.payload };
     },
-    // Reset trip members
     resetTripMembers(state) {
-      state.tripMembers = [];
+      return { ...state, tripMembers: [] };
     },
-    // Set planned budget
     setPlannedBudget(state, action) {
-      state.plannedBudget = action.payload;
+      return { ...state, plannedBudget: action.payload };
     },
-    // Reset the entire trip plan state
-    resetTripPlan(state) {
+    resetTripPlan() {
       return initialState;
     },
   },
@@ -95,7 +164,10 @@ export const {
   setEndDate,
   setNotes,
   setCoverImage,
-  setItinerary,
+  setInitialItinerary,
+  shiftItinerary,
+  setItineraryItemPlaceToVisit,
+  setItineraryItemNote,
   addTripMember,
   removeTripMember,
   setTripMembers,

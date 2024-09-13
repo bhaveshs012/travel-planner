@@ -109,14 +109,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      {
-        path: "edit",
-        element: (
-          <ProtectedRoute>
-            <EditPlan />
-          </ProtectedRoute>
-        ),
-      },
     ],
   },
   {

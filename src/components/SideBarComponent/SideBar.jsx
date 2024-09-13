@@ -1,8 +1,15 @@
 import React from "react";
 import SideBarHeader from "./SideBarHeader";
 import SideBarLink from "./SideBarLink";
+import { Button } from "../Form";
 
-function SideBar({ sideBarOpen, handleToggleSideBar, sideBarLinks }) {
+function SideBar({
+  sideBarOpen,
+  handleToggleSideBar,
+  sideBarLinks,
+  CTA,
+  CTAFunction,
+}) {
   return (
     <div
       className={`${
@@ -13,17 +20,31 @@ function SideBar({ sideBarOpen, handleToggleSideBar, sideBarLinks }) {
         handleToggleSideBar={handleToggleSideBar}
         isSideBarOpen={sideBarOpen}
       />
+      <div className="flex flex-col h-full justify-between">
+        {/* Sidebar links section */}
+        <div className="p-4 flex flex-col space-y-4 flex-grow font-bold text-md">
+          {sideBarLinks.map((link) => (
+            <SideBarLink
+              key={link.name}
+              title={link.name}
+              sideBarOpen={sideBarOpen}
+              icon={link.icon}
+              path={link.path}
+            />
+          ))}
+        </div>
 
-      <div className="p-4 flex text-lg font-bold flex-col space-y-4">
-        {sideBarLinks.map((link) => (
-          <SideBarLink
-            key={link.name}
-            title={link.name}
-            sideBarOpen={sideBarOpen}
-            icon={link.icon}
-            path={link.path}
-          />
-        ))}
+        {/* CTA button section */}
+        {CTA && (
+          <div className="p-4">
+            <Button
+              className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900"
+              onClick={CTAFunction}
+            >
+              {CTA}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
