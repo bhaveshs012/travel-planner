@@ -3,6 +3,7 @@ import Detail from "../../../components/TripSummaryCard/Detail";
 import { FaBolt, FaCalendarDays } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import { stringToDateConverter } from "../../../utils/stringToDateConverter";
 
 const TripSummaryCardHorizontal = ({
@@ -17,8 +18,15 @@ const TripSummaryCardHorizontal = ({
   placesToVisit,
   amount,
 }) => {
+  const navigate = useNavigate();
+  const handleOnClick = () => {
+    navigate(`/${tripId}`);
+  };
   return (
-    <div className="flex w-full h-2/4 rounded-lg overflow-hidden shadow-lg">
+    <div
+      onClick={handleOnClick}
+      className="flex w-full h-2/4 rounded-lg overflow-hidden shadow-lg cursor-pointer"
+    >
       <img className="w-1/3 h-64 object-cover" src={image} alt="Trip" />
       <div className="w-2/3 p-6 flex flex-col justify-between">
         <div className="space-y-2">
@@ -33,9 +41,10 @@ const TripSummaryCardHorizontal = ({
           </div>
           <p className="text-gray-700 text-base font-normal">{description}</p>
           <div className="flex-grow space-y-4">
-            {placesToVisit.map((place) => (
-              <Detail content={place} />
-            ))}
+            {placesToVisit &&
+              placesToVisit.map(
+                (place) => place !== "" && <Detail content={place} />
+              )}
           </div>
         </div>
         <div className="flex my-4">

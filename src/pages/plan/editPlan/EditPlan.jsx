@@ -50,6 +50,7 @@ function EditPlan() {
         sideBarOpen={isSidebarOpen}
         handleToggleSideBar={toggleSidebar}
         sideBarLinks={sideBarLinks}
+        tripId={tripId}
         CTA={"Save"}
         CTAFunction={handleSave}
       />

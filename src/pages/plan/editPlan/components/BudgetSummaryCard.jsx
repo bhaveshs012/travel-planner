@@ -2,6 +2,7 @@ import React from "react";
 import { FaRegMoneyBill1, FaMoneyBillTransfer } from "react-icons/fa6";
 import { ButtonWithIcon } from "../../../../components/Buttons";
 import { convertToINR } from "../../../../utils/currencyFormatter";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function BudgetSummaryCard({ tripExpenseSummaryForDashboard }) {
   const getSpendingPercentage = () => {
@@ -19,6 +20,14 @@ function BudgetSummaryCard({ tripExpenseSummaryForDashboard }) {
 
     // Return the percentage
     return `${percentage}%`;
+  };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleOnClick = () => {
+    if (
+      location.pathname !== `/${tripExpenseSummaryForDashboard.tripId}/expenses`
+    )
+      navigate(`/${tripExpenseSummaryForDashboard.tripId}/expenses`);
   };
 
   return (
@@ -62,7 +71,8 @@ function BudgetSummaryCard({ tripExpenseSummaryForDashboard }) {
             </div>
             <div>
               <ButtonWithIcon
-                title={"Debt Summary"}
+                title={"View Detailed Summary"}
+                onClick={handleOnClick}
                 icon={<FaMoneyBillTransfer />}
               />
             </div>

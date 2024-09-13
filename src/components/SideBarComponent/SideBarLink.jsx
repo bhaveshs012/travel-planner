@@ -1,13 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-function SideBarLink({ sideBarOpen, icon, title, path }) {
+
+function SideBarLink({ sideBarOpen, icon, title, path, tripId, handleScroll }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log("Clicked: ", path);
-
-    navigate(path);
+    if (handleScroll) {
+      handleScroll();
+    } else {
+      if (title === "Bookings") {
+        navigate(`/${tripId}/bookings`);
+      } else navigate(path);
+    }
   };
+
   return (
     <button
       onClick={handleClick}

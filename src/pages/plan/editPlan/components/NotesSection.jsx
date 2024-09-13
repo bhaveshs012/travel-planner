@@ -4,7 +4,7 @@ import { SectionHeading } from "./index";
 import { useSelector, useDispatch } from "react-redux";
 import { setNotes } from "../../../../features/tripPlanSlice";
 
-const NotesSection = () => {
+const NotesSection = React.forwardRef(({ props }, ref) => {
   //* Redux ::
   const tripPlan = useSelector((state) => state.tripPlan);
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const NotesSection = () => {
   };
 
   return (
-    <section>
+    <section ref={ref} {...props}>
       <SectionHeading
         title={"Notes"}
         subtile={
@@ -29,6 +29,6 @@ const NotesSection = () => {
       />
     </section>
   );
-};
+});
 
 export default NotesSection;

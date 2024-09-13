@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { InviteUserModal } from "../../../../components";
 
-const HeroSection = () => {
+const HeroSection = React.forwardRef(({ props }, ref) => {
   const { tripId } = useParams();
 
   //* Redux ::
@@ -42,7 +42,7 @@ const HeroSection = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="relative h-auto w-full">
+    <div className="relative h-auto w-full" {...props} ref={ref}>
       <InviteUserModal
         ref={inviteUserModalRef}
         fromTripDashboard={true}
@@ -83,6 +83,6 @@ const HeroSection = () => {
       </div>
     </div>
   );
-};
+});
 
 export default HeroSection;

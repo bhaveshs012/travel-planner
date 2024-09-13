@@ -2,7 +2,6 @@ import {
   FaHome, // Dashboard
   FaStar, // Favourites
   FaCompass, // Discover
-  FaSuitcase, // Bookings
   FaMoneyBillWave, // Expenses
   FaUser, // Profile
 } from "react-icons/fa";
@@ -23,11 +22,6 @@ const sideBarLinks = [
     name: "Discover",
     icon: <FaCompass className="text-xl" />,
     path: "/dashboard/discover",
-  },
-  {
-    name: "Bookings",
-    icon: <FaSuitcase className="text-xl" />,
-    path: "/dashboard/bookings",
   },
   {
     name: "Expenses",
