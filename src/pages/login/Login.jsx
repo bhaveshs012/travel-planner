@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Input, Button } from "../../components/Form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login, loginFailure } from "../../features/authSlice";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import apiClient from "../../api/apiClient";
 
-function Login() {
+const Login = () => {
   //* Pre requisites for React Hook Form
   const {
     register,
@@ -23,32 +22,27 @@ function Login() {
   const location = useLocation();
   const { error, isAuthenticated } = useSelector((state) => state.auth);
 
-  const fromRoute = location.state?.from?.pathname || "/";
+  const fromRoute = location.state?.from?.pathname || "/dashboard";
 
-  // //* Toasts for Errors
-  let toastId = null;
+  //* Toast Ref for preventing multiple toasts
+  const toastIdRef = useRef(null);
+
+  //* Toast for Errors
   useEffect(() => {
-    if (error) {
-      if (!toast.isActive(toastId)) {
-        toastId = toast.error(errorMessage);
-      }
+    if (error && !toast.isActive(toastIdRef.current)) {
+      toastIdRef.current = toast.error(error);
     }
   }, [error]);
 
+  //* If already logged in, redirect to dashboard
   useEffect(() => {
-    //* If Already Logged In then directly move to dashboard !
     if (isAuthenticated) {
-      navigate(location.state?.from?.pathname || "/dashboard", {
-        replace: true,
-      });
+      console.log("Moving out from login page !!");
+      navigate(fromRoute, { replace: true });
     }
   }, [isAuthenticated]);
 
   const onSubmit = async ({ email, password }) => {
-    if (isAuthenticated) {
-      navigate(fromRoute, { replace: true });
-      return;
-    }
     try {
       setIsLoading(true);
       const response = await apiClient.post("/users/login", {
@@ -57,13 +51,10 @@ function Login() {
       });
       dispatch(login(response.data.data.user));
       toast.success("User Logged In !!");
-      navigate(fromRoute, { replace: true });
     } catch (error) {
-      if (error.response) {
-        const errorMessage = error.response.data.message || "An error occurred";
-        toast.error(errorMessage); // Display the error message in a toast
-        dispatch(loginFailure(errorMessage)); // Optionally dispatch an action to store the error in Redux
-      }
+      const errorMessage = error.response?.data.message || "An error occurred";
+      toast.error(errorMessage);
+      dispatch(loginFailure(errorMessage));
     } finally {
       setIsLoading(false);
     }
@@ -116,6 +107,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
