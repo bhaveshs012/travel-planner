@@ -73,34 +73,6 @@ const ProfileDetailsChangeForm = ({
           error={errors.username?.message}
         />
       </div>
-      <div className="flex flex-row gap-x-8 w-full justify-center">
-        <Input
-          label="Password"
-          placeholder="Enter your password"
-          type="password"
-          className="my-4 w-full"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters long",
-            },
-          })}
-          error={errors.password?.message}
-        />
-        <Input
-          label="Confirm Password"
-          placeholder="Enter password again"
-          type="password"
-          className="my-4 w-full"
-          {...register("confirmPassword", {
-            required: "Confirm Password is required",
-            validate: (value) =>
-              value === watch("password") || "Passwords do not match",
-          })}
-          error={errors.confirmPassword?.message}
-        />
-      </div>
       <Button
         className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900 disabled:bg-slate-300"
         type="submit"

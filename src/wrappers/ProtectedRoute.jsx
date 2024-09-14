@@ -6,8 +6,6 @@ const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const location = useLocation();
 
-  console.log("In Protected Route :: ", isAuthenticated);
-
   return isAuthenticated ? (
     children
   ) : (

@@ -34,9 +34,6 @@ const BudgetSection = React.forwardRef(({ props }, ref) => {
           title={"Budgeting"}
           subtile={"Track all of your trip expenses at one place.."}
         />
-        <div>
-          <ButtonWithIcon title={"Add an Expense"} icon={<FaPlus />} />
-        </div>
       </div>
       <BudgetSummaryCard
         tripExpenseSummaryForDashboard={tripExpenseSummaryForDashboard}

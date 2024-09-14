@@ -6,6 +6,7 @@ import { sideBarLinks } from "./data/sidebarLinks";
 import apiClient from "../../../api/apiClient";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { FaSave } from "react-icons/fa";
 
 function EditPlan() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -53,6 +54,7 @@ function EditPlan() {
         tripId={tripId}
         CTA={"Save"}
         CTAFunction={handleSave}
+        CTAIcon={<FaSave />}
       />
       <div
         className={`w-full ${

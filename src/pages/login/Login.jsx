@@ -20,7 +20,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { error, isAuthenticated } = useSelector((state) => state.auth);
+  const { error } = useSelector((state) => state.auth);
 
   const fromRoute = location.state?.from?.pathname || "/dashboard";
 
@@ -34,14 +34,6 @@ const Login = () => {
     }
   }, [error]);
 
-  //* If already logged in, redirect to dashboard
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log("Moving out from login page !!");
-      navigate(fromRoute, { replace: true });
-    }
-  }, [isAuthenticated]);
-
   const onSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
@@ -50,6 +42,7 @@ const Login = () => {
         password,
       });
       dispatch(login(response.data.data.user));
+      navigate(fromRoute, { replace: true });
       toast.success("User Logged In !!");
     } catch (error) {
       const errorMessage = error.response?.data.message || "An error occurred";

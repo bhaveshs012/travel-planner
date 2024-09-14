@@ -4,7 +4,6 @@ import { BudgetSummaryCard } from "../plan/editPlan/components";
 import { BasicTableLayout, TransactionTile } from "./components";
 import { FaPlus } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
-import { SmallFilledButton } from "../../components/Buttons";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../../api/apiClient";
 import { AddTransactionModal } from "../../components/index";
@@ -122,8 +121,6 @@ function TripwiseExpenseDetail() {
     return <div>Error</div>;
   }
 
-  console.log("Data :: ", tripSummaryData);
-
   return (
     <div className="p-8 flex flex-col gap-y-8">
       <AddTransactionModal tripId={tripId} ref={transactionModalRef} />
@@ -135,11 +132,11 @@ function TripwiseExpenseDetail() {
         <BudgetSummaryCard
           tripExpenseSummaryForDashboard={tripSummaryData}
           buttonsRequired={false}
+          isDetailedExpensePage={true}
         />
       </div>
       <div className="flex items-center justify-between">
         <p className="text-xl font-bold">Contribution Summary</p>
-        <SmallFilledButton title={"Settle Up"} />
       </div>
       <div className="flex gap-x-4 justify-evenly w-full shadow-lg rounded-lg p-4">
         <BasicTableLayout

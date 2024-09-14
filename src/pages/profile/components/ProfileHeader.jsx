@@ -4,16 +4,13 @@ import apiClient from "../../../api/apiClient";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 const ProfileHeader = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       const response = await apiClient.post("/users/logout");
       dispatch(logout());
-      navigate("/");
       toast.success("User Logged Out !!");
     } catch (error) {
       toast.error("Some Error Occurred !!");
