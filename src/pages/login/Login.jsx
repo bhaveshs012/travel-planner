@@ -23,7 +23,7 @@ function Login() {
   const location = useLocation();
   const { error, isAuthenticated } = useSelector((state) => state.auth);
 
-  const fromRoute = location.state?.from?.pathname || "/dashboard";
+  const fromRoute = location.state?.from?.pathname || "/";
 
   // //* Toasts for Errors
   let toastId = null;
@@ -36,14 +36,16 @@ function Login() {
   }, [error]);
 
   useEffect(() => {
-    if (isAuthenticated && location.pathname === "/login") {
-      navigate(fromRoute, { replace: true });
+    //* If Already Logged In then directly move to dashboard !
+    if (isAuthenticated) {
+      navigate(location.state?.from?.pathname || "/dashboard", {
+        replace: true,
+      });
     }
-  }, [isAuthenticated, navigate, location.pathname, fromRoute]);
+  }, [isAuthenticated]);
 
   const onSubmit = async ({ email, password }) => {
     if (isAuthenticated) {
-      // If the user is already authenticated, no need to log in again
       navigate(fromRoute, { replace: true });
       return;
     }
