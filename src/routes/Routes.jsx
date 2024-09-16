@@ -14,6 +14,7 @@ import {
   Discover,
   PageNotFound,
   Dashboard,
+  Notifications,
 } from "../pages/index";
 import ProtectedRoute from "../wrappers/ProtectedRoute";
 import Layout from "../Layout";
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "notifications",
+        element: (
+          <ProtectedRoute>
+            <Notifications />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "discover",
         element: (
           <ProtectedRoute>
@@ -140,6 +149,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "*", // This will catch all unmatched routes
     element: <PageNotFound />,

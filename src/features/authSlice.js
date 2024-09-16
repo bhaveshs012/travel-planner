@@ -15,17 +15,22 @@ const authSlice = createSlice({
     login(state, action) {
       state.user = action.payload;
       state.isAuthenticated = true;
-      state.error = null;
+      state.error = null; // Clear error on successful login
     },
     loginFailure(state, action) {
       state.error = action.payload;
+      state.isAuthenticated = false; // Ensure this is set to false on failure
+    },
+    setUser(state, action) {
+      state.user = action.payload;
     },
     logout(state) {
       state.user = null;
       state.isAuthenticated = false;
+      state.error = null; // Clear any errors on logout
     },
   },
 });
 
-export const { login, loginFailure, logout } = authSlice.actions;
+export const { login, loginFailure, logout, setUser } = authSlice.actions;
 export default authSlice.reducer;

@@ -13,6 +13,7 @@ import TripwiseExpenseDetail from "./tripwiseExpenseDetail/TripwiseExpenseDetail
 import Discover from "./discover/Discover";
 import PageNotFound from "./common/PageNotFound";
 import Dashboard from "./dashboard/Dashboard";
+import Notifications from "./notifications/Notifications";
 
 export {
   Home,
@@ -30,4 +31,5 @@ export {
   Discover,
   PageNotFound,
   Dashboard,
+  Notifications,
 };

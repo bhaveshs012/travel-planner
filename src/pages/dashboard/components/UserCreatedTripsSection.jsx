@@ -1,11 +1,25 @@
 import React from "react";
 import TripSummaryCard from "../../../components/TripSummaryCard/TripSummaryCard";
+import { FaPlus } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const UserCreatedTripsSection = ({ tripDetails }) => {
+  const navigate = useNavigate();
+  const handleCreateTripClick = () => {
+    navigate("/plan/create", { exact: true });
+  };
+
   return (
     <div className="space-y-2">
-      <div>
+      <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">{"Trips Planned By You"}</h1>
+        <button
+          onClick={handleCreateTripClick}
+          className="flex space-x-4 justify-center items-center px-4 py-2 border-2 border-black text-black text-sm font-semibold rounded hover:bg-black hover:text-white"
+        >
+          <FaPlus />
+          <p>Plan a new Trip</p>
+        </button>
       </div>
       <div className="h-full overflow-x-auto scroll-m-2">
         {tripDetails.length !== 0 ? (

@@ -14,11 +14,6 @@ const sideBarLinks = [
     path: "/dashboard",
   },
   {
-    name: "Favourites",
-    icon: <FaStar className="text-xl" />,
-    path: "/dashboard/notifications",
-  },
-  {
     name: "Discover",
     icon: <FaCompass className="text-xl" />,
     path: "/dashboard/discover",

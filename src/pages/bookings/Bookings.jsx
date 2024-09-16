@@ -25,6 +25,7 @@ function Bookings() {
     data: tripBookingsData,
     error,
     isLoading,
+    refetch
   } = useQuery({
     queryKey: ["tripBookings"],
     queryFn: fetchAllBookings,
@@ -35,7 +36,11 @@ function Bookings() {
 
   return (
     <div className="w-screen p-8">
-      <AddBookingModal ref={bookingModalRef} tripId={tripId} />
+      <AddBookingModal
+        ref={bookingModalRef}
+        tripId={tripId}
+        refetch={refetch}
+      />
       <PageHeader
         title={tripBookingsData.tripName}
         subtitle={tripBookingsData.tripDesc}

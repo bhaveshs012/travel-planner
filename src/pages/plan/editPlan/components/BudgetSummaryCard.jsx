@@ -4,7 +4,10 @@ import { ButtonWithIcon } from "../../../../components/Buttons";
 import { convertToINR } from "../../../../utils/currencyFormatter";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function BudgetSummaryCard({ tripExpenseSummaryForDashboard }) {
+function BudgetSummaryCard({
+  tripExpenseSummaryForDashboard,
+  isDetailedExpensePage,
+}) {
   const getSpendingPercentage = () => {
     // Convert inputs to numbers
     const expenses = Number(tripExpenseSummaryForDashboard.totalExpenses);
@@ -60,21 +63,25 @@ function BudgetSummaryCard({ tripExpenseSummaryForDashboard }) {
         {
           <div className="flex space-x-4">
             <div>
-              <ButtonWithIcon
-                title={
-                  tripExpenseSummaryForDashboard.plannedBudget !== 0
-                    ? "Edit Budget"
-                    : "Set a Budget"
-                }
-                icon={<FaRegMoneyBill1 />}
-              />
+              {!isDetailedExpensePage && (
+                <ButtonWithIcon
+                  title={
+                    tripExpenseSummaryForDashboard.plannedBudget !== 0
+                      ? "Edit Budget"
+                      : "Set a Budget"
+                  }
+                  icon={<FaRegMoneyBill1 />}
+                />
+              )}
             </div>
             <div>
-              <ButtonWithIcon
-                title={"View Detailed Summary"}
-                onClick={handleOnClick}
-                icon={<FaMoneyBillTransfer />}
-              />
+              {!isDetailedExpensePage && (
+                <ButtonWithIcon
+                  title={"View Detailed Summary"}
+                  onClick={handleOnClick}
+                  icon={<FaMoneyBillTransfer />}
+                />
+              )}
             </div>
           </div>
         }

@@ -5,9 +5,13 @@ const splitBetweenSlice = createSlice({
   initialState: [],
   reducers: {
     addTripMember(state, action) {
-      const updatedSet = new Set(state);
-      updatedSet.add(action.payload);
-      return [...updatedSet];
+      const newMember = action.payload;
+      const memberExists = state.some(
+        (member) => member.userId === newMember.userId
+      );
+      if (!memberExists) {
+        return [...state, newMember]; // Add new member immutably
+      }
     },
     removeTripMember(state, action) {
       //* Removing Based on the id's objects cannot be matched like normal strings and numbers

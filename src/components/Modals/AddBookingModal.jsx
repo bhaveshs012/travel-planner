@@ -11,23 +11,24 @@ import TravelBookingDetails from "./TravelBookingDetails";
 import HotelBookingDetails from "./HotelBookingDetails";
 import { convertToTimeFormat } from "../../utils/convertTimeFormat";
 import apiClient from "../../api/apiClient";
+import { toast } from "react-toastify";
 
-const AddBookingModal = forwardRef(({ tripId }, ref) => {
+const AddBookingModal = forwardRef(({ tripId, refetch }, ref) => {
   const dialogRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      watch,
-      reset,
-    } = useForm({
-      defaultValues: {
-        bookingType: "Travel",
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset,
+  } = useForm({
+    defaultValues: {
+      bookingType: "Travel",
+    },
+  });
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -55,8 +56,10 @@ const AddBookingModal = forwardRef(({ tripId }, ref) => {
 
     try {
       const response = await apiClient.post("/bookings/addBooking", formData);
-      console.log(response.data.data);
+      toast.success("Booking Added Successfully !!");
+      refetch();
     } catch (error) {
+      toast.error("Some Error Occurred !!");
       setError(error.message);
     } finally {
       reset();
@@ -69,8 +72,6 @@ const AddBookingModal = forwardRef(({ tripId }, ref) => {
     openModal: () => dialogRef.current.showModal(),
     closeModal: () => dialogRef.current.close(),
   }));
-
-  if (error !== "") return <div>Error :: {error}</div>;
 
   return (
     <dialog ref={dialogRef} className="w-1/2 h-auto p-6 rounded-lg shadow-lg">

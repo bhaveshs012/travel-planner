@@ -37,7 +37,7 @@ const AvatarInput = ({ register, userImage }) => {
             ref={fileInputRef}
           />
           <img
-            src={userImage || avatar || placeholderImage}
+            src={avatar || userImage || placeholderImage}
             alt="Avatar"
             className="w-full h-full object-cover"
           />

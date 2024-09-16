@@ -1,8 +1,22 @@
 import React from "react";
-import { FaBell } from "react-icons/fa";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaRegCircleUser } from "react-icons/fa6";
+import apiClient from "../../../api/apiClient";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../features/authSlice";
+import { toast } from "react-toastify";
 
 const ProfileHeader = () => {
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    try {
+      const response = await apiClient.post("/users/logout");
+      dispatch(logout());
+      toast.success("User Logged Out !!");
+    } catch (error) {
+      toast.error("Some Error Occurred !!");
+    }
+  };
+
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
@@ -12,9 +26,13 @@ const ProfileHeader = () => {
             <p>Account Preferences</p>
           </div>
         </div>
-        <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-          <FaBell className="text-lg" />
-        </div>
+        <button
+          className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center"
+          title="Logout"
+          onClick={handleLogout}
+        >
+          <FaArrowRightFromBracket className="text-lg" />
+        </button>
       </div>
     </div>
   );
