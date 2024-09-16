@@ -45,7 +45,7 @@ const Login = () => {
       navigate(fromRoute, { replace: true });
       toast.success("User Logged In !!");
     } catch (error) {
-      const errorMessage = error.response?.data.message || "An error occurred";
+      const errorMessage = error.response?.data?.message || "An error occurred";
       toast.error(errorMessage);
       dispatch(loginFailure(errorMessage));
     } finally {

@@ -15,9 +15,8 @@ const queryClient = new QueryClient();
 const Main = () => {
   return (
     <>
-      <RouterProvider router={router}>
-        <ToastContainer />
-      </RouterProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 };

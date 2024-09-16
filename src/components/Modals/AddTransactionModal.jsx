@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import apiClient from "../../api/apiClient";
 import { resetSplitBetween } from "../../features/splitBetweenSlice";
 
-const AddTransactionModal = forwardRef(({ tripId }, ref) => {
+const AddTransactionModal = forwardRef(({ tripId, refetch }, ref) => {
   //* States
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,7 +49,8 @@ const AddTransactionModal = forwardRef(({ tripId }, ref) => {
         `/expenses/${tripId}/addExpense`,
         finalData
       );
-      console.log("Expense Added :: ", response.data.data);
+      toast.success("Transaction Added Successfully !!");
+      refetch();
       dispatch(resetSplitBetween());
       reset();
       dialogRef.current.close();

@@ -98,6 +98,7 @@ function TripwiseExpenseDetail() {
     data: transactionData,
     error: transactionError,
     isLoading: isTransactionLoading,
+    refetch,
   } = useQuery({
     queryKey: ["fetchTransactions", tripId, handleOpenModal],
     queryFn: fetchTransactions,
@@ -123,7 +124,11 @@ function TripwiseExpenseDetail() {
 
   return (
     <div className="p-8 flex flex-col gap-y-8">
-      <AddTransactionModal tripId={tripId} ref={transactionModalRef} />
+      <AddTransactionModal
+        tripId={tripId}
+        ref={transactionModalRef}
+        refetch={refetch}
+      />
       <PageHeader
         title={tripSummaryData.tripName}
         subtitle={tripSummaryData.tripDesc}
