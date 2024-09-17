@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // Create an instance of Axios
 const apiClient = axios.create({
-  baseURL: "http://localhost:8000/api/v1",
+  baseURL: "https://travel-planner-backend-sm93.onrender.com/api/v1",
   withCredentials: true, // Allow cookies to be sent with requests
 });
 
@@ -47,7 +47,7 @@ apiClient.interceptors.response.use(
 
         if (refreshToken) {
           const response = await axios.post(
-            "http://localhost:8000/api/v1/users/refresh-token",
+            "https://travel-planner-backend-sm93.onrender.com/api/v1/users/refresh-token",
             {
               refreshToken: refreshToken,
             },

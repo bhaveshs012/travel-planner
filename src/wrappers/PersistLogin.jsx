@@ -11,8 +11,6 @@ const PersistLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("Inside Pers Login");
-
   useEffect(() => {
     const verifyRefreshToken = async () => {
       try {

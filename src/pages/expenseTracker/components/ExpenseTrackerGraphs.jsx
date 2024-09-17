@@ -15,7 +15,7 @@ import {
   convertMonthDataForSelectedYear,
 } from "../utils/dataConvertor";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../../../api/apiClient";
 
 ChartJS.register(
   BarElement,
@@ -31,24 +31,21 @@ const ExpenseTrackerGraphs = () => {
 
   const handleYearChange = (e) => {
     const newYear = parseInt(e.target.value, 10);
-    console.log("Year changed to:", newYear);
     setSelectedYear(e.target.value);
   };
 
   //* Get Entire Data for Every Year ::
   const fetchMonthWiseSpendingForYear = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/expenses/getMonthWiseExpenses`,
-      { withCredentials: true }
-    );
+    const response = await apiClient.get(`/expenses/getMonthWiseExpenses`, {
+      withCredentials: true,
+    });
     return response.data.data;
   };
 
   const fetchCategoryWiseSpendingForYear = async () => {
-    const response = await axios.get(
-      `${ApiConstants.baseUrl}/expenses/getCategoryWiseExpenses`,
-      { withCredentials: true }
-    );
+    const response = await apiClient.get(`/expenses/getCategoryWiseExpenses`, {
+      withCredentials: true,
+    });
     return response.data.data;
   };
 
