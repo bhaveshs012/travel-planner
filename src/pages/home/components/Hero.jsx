@@ -1,6 +1,6 @@
 import React from "react";
 import coreConstants from "../../../constants/core";
-import HeroImage from "../../../assets/hero-image.jpg";
+import HeroImage from "/assets/hero-image.jpg";
 
 function Hero() {
   return (
