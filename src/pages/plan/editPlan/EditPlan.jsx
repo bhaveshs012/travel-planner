@@ -23,11 +23,6 @@ function EditPlan() {
         (tripMember) => tripMember.userId
       );
 
-      console.log("Trip Plan :: ", {
-        startDate: tripPlan.startDate,
-        endDate: tripPlan.endDate,
-      });
-
       const response = await apiClient.patch(`/tripPlan/${tripId}`, {
         tripName: tripPlan.tripName,
         tripDesc: tripPlan.tripDesc,

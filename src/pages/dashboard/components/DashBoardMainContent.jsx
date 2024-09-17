@@ -17,7 +17,7 @@ const DashBoardMainContent = () => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["dashboardTripSummary"],
+    queryKey: ["fetchDashboardTripSummary"],
     queryFn: fetchDashboardTripSummary,
   });
 
