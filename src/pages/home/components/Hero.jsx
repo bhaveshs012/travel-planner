@@ -1,5 +1,6 @@
 import React from "react";
 import coreConstants from "../../../constants/core";
+import HeroImage from "../../../assets/hero-image.jpg";
 
 function Hero() {
   return (
@@ -24,7 +25,7 @@ function Hero() {
         <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center">
           <img
             className="h-auto md:max-w-lg"
-            src={"src/assets/hero-image.jpg"}
+            src={HeroImage}
             height={400}
             width={400}
             alt="Travel"
