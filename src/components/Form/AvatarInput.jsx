@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import AvatarPlaceholder from "../../assets/avatarPlaceholder.png";
+import AvatarPlaceholder from "/assets/avatarPlaceholder.png";
 
 const AvatarInput = ({ register, userImage }) => {
   const [avatar, setAvatar] = useState(null);

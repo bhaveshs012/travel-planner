@@ -4,7 +4,7 @@ import { FaCalendarDays } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import tripIllustration from "../../assets/trip-illustration.jpg";
+import tripIllustration from "/assets/trip-illustration.jpg";
 
 const TripSummaryCard = ({
   // image,

@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../assets/Logo2.png";
+import Logo from "/assets/Logo2.png";
 import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
