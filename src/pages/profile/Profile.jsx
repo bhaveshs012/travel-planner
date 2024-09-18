@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector, useDispatch } from "react-redux";
 import { loginFailure, setUser } from "../../features/authSlice";
 import apiClient from "../../api/apiClient";
+import LoadingScreen from "../common/LoadingScreen";
+import ErrorScreen from "../common/ErrorScreen";
 
 function Profile() {
   const {
@@ -42,8 +44,8 @@ function Profile() {
 
   const activeUser = user || currentUser;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen />;
 
   // Example pre-fetched data
   const defaultValues = {

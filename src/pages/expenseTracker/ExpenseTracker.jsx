@@ -3,6 +3,8 @@ import { ExpenseTrackerGraphs, TripWiseExpenseCard } from "./components";
 import { PageHeader } from "../../components/index";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../../api/apiClient";
+import LoadingScreen from "../common/LoadingScreen";
+import ErrorScreen from "../common/ErrorScreen";
 
 function ExpenseTracker() {
   const fetchTripWiseExpenseData = async () => {
@@ -21,8 +23,8 @@ function ExpenseTracker() {
     queryFn: fetchTripWiseExpenseData,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen />;
 
   return (
     <div className="p-8">

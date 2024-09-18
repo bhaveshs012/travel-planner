@@ -14,6 +14,8 @@ import Discover from "./discover/Discover";
 import PageNotFound from "./common/PageNotFound";
 import Dashboard from "./dashboard/Dashboard";
 import Notifications from "./notifications/Notifications";
+import ErrorScreen from "./common/ErrorScreen";
+import LoadingScreen from "./common/LoadingScreen";
 
 export {
   Home,
@@ -32,4 +34,6 @@ export {
   PageNotFound,
   Dashboard,
   Notifications,
+  ErrorScreen,
+  LoadingScreen,
 };

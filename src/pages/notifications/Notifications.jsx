@@ -3,6 +3,8 @@ import { PageHeader } from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import NotificationTile from "./components/NotificationTile";
 import apiClient from "../../api/apiClient";
+import LoadingScreen from "../common/LoadingScreen";
+import ErrorScreen from "../common/ErrorScreen";
 
 const Notifications = () => {
   const fetchAllInvitations = async () => {
@@ -20,8 +22,8 @@ const Notifications = () => {
     queryFn: fetchAllInvitations,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen />;
 
   return (
     <div className="w-full p-8 space-y-6">

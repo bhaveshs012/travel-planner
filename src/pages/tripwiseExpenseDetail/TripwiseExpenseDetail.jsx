@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../../api/apiClient";
 import { AddTransactionModal } from "../../components/index";
+import LoadingScreen from "../common/LoadingScreen";
+import ErrorScreen from "../common/ErrorScreen";
 
 function TripwiseExpenseDetail() {
   const { tripId } = useParams();
@@ -111,7 +113,7 @@ function TripwiseExpenseDetail() {
     contributionError ||
     isTransactionLoading
   )
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   if (
     error ||
     amountOwedByUserError ||
@@ -119,7 +121,7 @@ function TripwiseExpenseDetail() {
     contributionDetailsLoading ||
     transactionError
   ) {
-    return <div>Error</div>;
+    return <ErrorScreen />;
   }
 
   return (

@@ -20,6 +20,7 @@ import ProtectedRoute from "../wrappers/ProtectedRoute";
 import Layout from "../Layout";
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardMainContent from "../pages/dashboard/components/DashBoardMainContent";
+import TripWrapper from "../wrappers/TripWrapper";
 
 const router = createBrowserRouter([
   {
@@ -127,7 +128,9 @@ const router = createBrowserRouter([
         path: "",
         element: (
           <ProtectedRoute>
-            <EditPlan />
+            <TripWrapper>
+              <EditPlan />
+            </TripWrapper>
           </ProtectedRoute>
         ),
       },
@@ -135,7 +138,9 @@ const router = createBrowserRouter([
         path: "bookings",
         element: (
           <ProtectedRoute>
-            <Bookings />
+            <TripWrapper>
+              <Bookings />
+            </TripWrapper>
           </ProtectedRoute>
         ),
       },
@@ -143,13 +148,14 @@ const router = createBrowserRouter([
         path: "expenses",
         element: (
           <ProtectedRoute>
-            <TripwiseExpenseDetail />
+            <TripWrapper>
+              <TripwiseExpenseDetail />
+            </TripWrapper>
           </ProtectedRoute>
         ),
       },
     ],
   },
-
   {
     path: "*", // This will catch all unmatched routes
     element: <PageNotFound />,
