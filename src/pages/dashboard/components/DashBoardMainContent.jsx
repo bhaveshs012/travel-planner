@@ -5,6 +5,8 @@ import UserCreatedTripsSection from "./UserCreatedTripsSection";
 import UserJoinedTripsSection from "./UserJoinedTripsSection";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../../../api/apiClient";
+import LoadingScreen from "../../common/LoadingScreen";
+import ErrorScreen from "../../common/ErrorScreen";
 
 const DashBoardMainContent = () => {
   const fetchDashboardTripSummary = async () => {
@@ -21,8 +23,8 @@ const DashBoardMainContent = () => {
     queryFn: fetchDashboardTripSummary,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen />;
 
   return (
     <div className="p-8 gap-y-8 space-y-8">

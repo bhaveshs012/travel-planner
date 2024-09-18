@@ -50,7 +50,7 @@ function Signup() {
       formData.append("password", password);
       formData.append("avatar", avatar);
 
-      const response = await apiClient.post("users/register", formData);
+      const response = await apiClient.post("/users/register", formData);
       toast.success(response.data.message);
       dispatch(login(response.data.data.user));
     } catch (error) {

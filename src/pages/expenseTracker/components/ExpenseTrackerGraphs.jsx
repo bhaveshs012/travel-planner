@@ -16,6 +16,8 @@ import {
 } from "../utils/dataConvertor";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../../../api/apiClient";
+import LoadingScreen from "../../common/LoadingScreen";
+import ErrorScreen from "../../common/ErrorScreen";
 
 ChartJS.register(
   BarElement,
@@ -84,15 +86,11 @@ const ExpenseTrackerGraphs = () => {
   }, [categoryWiseData, selectedYear]);
 
   if (isMonthwiseLoading || isCategoryWiseLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   if (monthwiseDataError || categoryDataError) {
-    return (
-      <div>
-        Error: {monthwiseDataError?.message || categoryDataError?.message}
-      </div>
-    );
+    return <ErrorScreen />;
   }
 
   return (

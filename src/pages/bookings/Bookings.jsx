@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useRef } from "react";
 import { AddBookingModal } from "../../components/index";
+import LoadingScreen from "../common/LoadingScreen";
+import ErrorScreen from "../common/ErrorScreen";
 
 function Bookings() {
   const { tripId } = useParams();
@@ -25,14 +27,14 @@ function Bookings() {
     data: tripBookingsData,
     error,
     isLoading,
-    refetch
+    refetch,
   } = useQuery({
     queryKey: ["tripBookings"],
     queryFn: fetchAllBookings,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen />;
 
   return (
     <div className="w-screen p-8">

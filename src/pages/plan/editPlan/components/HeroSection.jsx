@@ -6,6 +6,8 @@ import apiClient from "../../../../api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { InviteUserModal } from "../../../../components";
+import LoadingScreen from "../../../common/LoadingScreen";
+import ErrorScreen from "../../../common/ErrorScreen";
 
 const HeroSection = React.forwardRef(({ props }, ref) => {
   const { tripId } = useParams();
@@ -38,8 +40,8 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) return <div>Loading ...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen />;
 
   return (
     <div className="relative h-auto w-full" {...props} ref={ref}>
