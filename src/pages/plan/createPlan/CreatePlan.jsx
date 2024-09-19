@@ -3,7 +3,10 @@ import { Input, Button, TextArea } from "../../../components/Form";
 import { FaUserPlus } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setInitialData } from "../../../features/tripPlanSlice";
+import {
+  setInitialData,
+  resetTripMembers,
+} from "../../../features/tripPlanSlice";
 import { InviteUserModal } from "../../../components/index";
 import apiClient from "../../../api/apiClient";
 import { toast } from "react-toastify";
@@ -35,6 +38,13 @@ function CreatePlanStarterPage() {
   const dispatch = useDispatch();
   const tripMembers = useSelector((state) => state.tripPlan.tripMembers);
   const itinerary = useSelector((state) => state.tripPlan.itinerary);
+
+  //* Initial Load : Reset Trip Members while creating the trip
+  useEffect(() => {
+    dispatch(resetTripMembers());
+
+    return () => {};
+  }, []);
 
   //* For Loaders:
   const [isLoading, setIsLoading] = useState(false);

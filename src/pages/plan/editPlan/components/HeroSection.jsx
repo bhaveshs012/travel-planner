@@ -5,7 +5,7 @@ import { setTripPlan } from "../../../../features/tripPlanSlice";
 import apiClient from "../../../../api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { InviteUserModal } from "../../../../components";
+import { EditTripBudgetModal, InviteUserModal } from "../../../../components";
 import LoadingScreen from "../../../common/LoadingScreen";
 import ErrorScreen from "../../../common/ErrorScreen";
 
@@ -18,7 +18,7 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
 
   //* Modal Setup
   const inviteUserModalRef = useRef(null);
-  const handleOpenModal = (e) => {
+  const handleOpenUserModal = (e) => {
     e.preventDefault();
     inviteUserModalRef.current.openModal();
   };
@@ -30,11 +30,8 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
     return response.data.data;
   };
 
-  const {
-    data: tripPlanData,
-    error,
-    isLoading,
-  } = useQuery({
+  //* Calling it only on initial Load
+  const { data, error, isLoading } = useQuery({
     queryKey: ["getTripDetailsById", tripId],
     queryFn: getTripDetailsById,
     refetchOnWindowFocus: false,
@@ -50,15 +47,13 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
         fromTripDashboard={true}
         tripId={tripId}
       />
+
       <div className="h-auto w-full">
         <img
-          src="https://i.natgeofe.com/n/8eba070d-14e5-4d07-8bab-9db774029063/93080.jpg?w=718&h=538"
-          alt="Taj Mahal"
+          src="https://c4.wallpaperflare.com/wallpaper/299/901/190/beach-indian-ocean-sand-sandy-beach-wallpaper-preview.jpg"
+          alt="Cover Image"
           className="w-full h-64 object-fill"
         />
-        <div className="absolute top-2 right-2 flex w-fit h-fit rounded-full p-4 bg-white bg-opacity-80 text-black">
-          <FaPencil />
-        </div>
       </div>
       <div className="relative top-0 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg p-6 max-w-xl w-full mx-4 -mt-10">
         <h1 className="text-3xl font-bold mb-4">{tripPlan.tripName}</h1>
@@ -69,7 +64,7 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
           <div
             className="my-1 flex justify-center items-center space-x-2"
             onClick={(e) => {
-              handleOpenModal(e);
+              handleOpenUserModal(e);
             }}
           >
             <button className="bg-gray-200 text-gray-800 p-2 rounded-full">

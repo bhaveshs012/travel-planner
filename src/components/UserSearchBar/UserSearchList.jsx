@@ -35,10 +35,11 @@ const UserSearchList = ({ searchTerm }) => {
 
   return (
     <div className="flex flex-col gap-4 justify-center bg-gray-100 w-full max-h-44 overflow-y-scroll p-4 rounded-lg">
-      {tripMembers.map((tripMember, index) => {
-        const isDisabled = tripMembersInState.some(
-          (member) => member.userId === tripMember.userId
-        );
+      {tripMembers.filteredMembers.map((tripMember, index) => {
+        const isDisabled =
+          tripMembersInState.some(
+            (member) => member.userId === tripMember.userId
+          ) || tripMember.userId === tripMembers.currentUserId;
 
         return (
           <button
