@@ -6,9 +6,9 @@ import { login, loginFailure } from "../../features/authSlice";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import apiClient from "../../api/apiClient";
+import Cookies from "js-cookie";
 
 const Login = () => {
-  //* Pre requisites for React Hook Form
   const {
     register,
     handleSubmit,
@@ -16,27 +16,24 @@ const Login = () => {
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
-  //* Redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, error, isAuthenticated } = useSelector((state) => state.auth);
+  const { error, isAuthenticated } = useSelector((state) => state.auth);
 
   const fromRoute = location.state?.from?.pathname || "/dashboard";
-
-  //* Toast Ref for preventing multiple toasts
   const toastIdRef = useRef(null);
 
-  //* Toast for Errors
   useEffect(() => {
     if (error && !toast.isActive(toastIdRef.current)) {
       toastIdRef.current = toast.error(error);
     }
   }, [error]);
 
-  //* If already logged in, redirect to dashboard
   useEffect(() => {
-    if (isAuthenticated) {
+    // Check both isAuthenticated and accessToken presence
+    const accessToken = Cookies.get("accessToken");
+    if (isAuthenticated && accessToken) {
       navigate(fromRoute, { replace: true });
     }
   }, [isAuthenticated]);
@@ -48,7 +45,13 @@ const Login = () => {
         email,
         password,
       });
+
+      // Save tokens in cookies
+      Cookies.set("accessToken", response.data.data.accessToken);
+      Cookies.set("refreshToken", response.data.data.refreshToken);
+
       dispatch(login(response.data.data.user));
+      navigate(fromRoute, { replace: true });
       toast.success("User Logged In !!");
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred";
@@ -84,9 +87,7 @@ const Login = () => {
             placeholder="Enter your password"
             type="password"
             className="my-4"
-            {...register("password", {
-              required: "Password is required",
-            })}
+            {...register("password", { required: "Password is required" })}
             error={errors.password?.message}
           />
           <div className="mb-4 text-center text-sm text-gray-700">

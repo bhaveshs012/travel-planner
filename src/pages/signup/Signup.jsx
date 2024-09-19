@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input, Button, AvatarInput } from "../../components/Form";
 import { PageHeader } from "../../components";
-import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { login, loginFailure } from "../../features/authSlice";
@@ -21,6 +20,8 @@ function Signup() {
   //* Redux
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
 
   //* Toasts for Errors
   let toastId = null;
@@ -51,13 +52,15 @@ function Signup() {
       formData.append("avatar", avatar);
 
       const response = await apiClient.post("/users/register", formData);
-      toast.success(response.data.message);
-      dispatch(login(response.data.data.user));
+
+      toast.success(`${response.data.message}! Login to Continue`);
+      //redirect to login
+      navigate("/login");
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message || "An error occurred";
         toast.error(errorMessage); // Display the error message in a toast
-        dispatch(loginFailure(errorMessage)); // Optionally dispatch an action to store the error in Redux
+        dispatch(loginFailure(errorMessage));
       }
     } finally {
       setIsLoading(false);
@@ -108,8 +111,8 @@ function Signup() {
               label="Username"
               placeholder="Enter your username"
               className="my-4 w-full"
-              {...register("username", { required: "username is required" })}
-              error={errors.lastName?.message}
+              {...register("username", { required: "Username is required" })}
+              error={errors.username?.message}
             />
           </div>
           <div className="flex flex-row gap-x-8 w-full justify-center">

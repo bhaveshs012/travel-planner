@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 const AddBookingModal = forwardRef(({ tripId, refetch }, ref) => {
   const dialogRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const {
     register,
@@ -26,13 +25,13 @@ const AddBookingModal = forwardRef(({ tripId, refetch }, ref) => {
     reset,
   } = useForm({
     defaultValues: {
-      bookingType: "Travel",
+      bookingType: "Hotel",
     },
   });
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("tripId", tripId);
     formData.append("bookingType", data.bookingType.toLowerCase());
     formData.append("bookingReceipt", data.bookingReceipt[0]);
@@ -55,12 +54,13 @@ const AddBookingModal = forwardRef(({ tripId, refetch }, ref) => {
     formData.append("bookingDetails", JSON.stringify(bookingDetails));
 
     try {
-      const response = await apiClient.post("/bookings/addBooking", formData);
+      const response = await apiClient.post("/bookings/addBooking", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       toast.success("Booking Added Successfully !!");
       refetch();
     } catch (error) {
       toast.error("Some Error Occurred !!");
-      setError(error.message);
     } finally {
       reset();
       dialogRef.current.close();

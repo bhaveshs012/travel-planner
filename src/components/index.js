@@ -9,6 +9,7 @@ import TripSummaryCard from "./TripSummaryCard/TripSummaryCard";
 import AddBookingModal from "./Modals/AddBookingModal";
 import AddTransactionModal from "./Modals/AddTransactionModal";
 import InviteUserModal from "./Modals/InviteUserModal";
+import EditTripBudgetModal from "./Modals/EditTripBudgetModal";
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   AddBookingModal,
   AddTransactionModal,
   InviteUserModal,
+  EditTripBudgetModal,
 };

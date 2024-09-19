@@ -6,11 +6,8 @@ import apiClient from "../api/apiClient";
 const TripWrapper = ({ children }) => {
   const { tripId } = useParams();
 
-  console.log(tripId);
-
   const validateTripId = async () => {
     const response = await apiClient.get(`/tripPlan/${tripId}/validateTripId`);
-    console.log(response.data);
     return response.data.data;
   };
 

@@ -1,8 +1,8 @@
 function convertToTimeFormat(timeStr) {
-  // Regular expression to match and validate the input time format
-  const timeRegex = /^([01]?[0-9]):([0-5][0-9])$/;
+  // Regular expression to match and validate the input time format (HH:MM or H:MM)
+  const timeRegex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
 
-  // Check if the input matches the expected HH:MM format
+  // Check if the input matches the expected format
   const match = timeStr.match(timeRegex);
   if (!match) {
     throw new Error("Invalid time format. Please use HH:MM or H:MM format.");
