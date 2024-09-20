@@ -7,6 +7,7 @@ import apiClient from "../../../api/apiClient";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { FaSave } from "react-icons/fa";
+import { useQueryClient } from "@tanstack/react-query";
 
 function EditPlan() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -16,6 +17,7 @@ function EditPlan() {
 
   const tripPlan = useSelector((state) => state.tripPlan);
   const { tripId } = useParams();
+  const queryClient = useQueryClient();
 
   const handleSave = async () => {
     try {
@@ -34,6 +36,7 @@ function EditPlan() {
         tripMembers: tripMembersIds,
         plannedBudget: tripPlan.plannedBudget,
       });
+      queryClient.refetchQueries(["getTripDetailsById", tripId]);
       toast.success("Trip Plan Updated Successfully !!");
     } catch (error) {
       toast.error("Some error occurred !!");

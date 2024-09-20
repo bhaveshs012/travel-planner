@@ -35,7 +35,11 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["getTripDetailsById", tripId],
     queryFn: getTripDetailsById,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false, // Prevent refetch on window focus
+    refetchOnMount: false, // Prevent refetch when component mounts
+    refetchOnReconnect: false, // Prevent refetch when the network reconnects
+    cacheTime: Infinity, // Cache data indefinitely
+    staleTime: Infinity, // Treat data as fresh forever (no auto refetch)
   });
 
   if (isLoading) return <LoadingScreen />;
