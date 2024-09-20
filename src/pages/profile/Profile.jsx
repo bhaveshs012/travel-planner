@@ -6,7 +6,7 @@ import {
 } from "./components/index";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginFailure, setUser } from "../../features/authSlice";
 import apiClient from "../../api/apiClient";
 import LoadingScreen from "../common/LoadingScreen";
@@ -18,10 +18,8 @@ function Profile() {
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
   } = useForm();
 
-  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   //* Get the current user
@@ -34,37 +32,37 @@ function Profile() {
     data: currentUser,
     error,
     isLoading,
+    refetch,
   } = useQuery({
-    queryKey: ["fetchCurrentUser", user],
+    queryKey: ["fetchCurrentUser"],
     queryFn: fetchCurrentUser,
-    enabled: !user, // Fetch only if user is not already in Redux state
+    refetchOnWindowFocus: false,
     onSuccess: (data) => dispatch(setUser(data)), // Store the fetched user in Redux
     onError: (err) => dispatch(loginFailure(err.message)),
   });
-
-  const activeUser = user || currentUser;
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen />;
 
   // Example pre-fetched data
   const defaultValues = {
-    firstName: activeUser.fullName?.split(" ")[0] || "",
-    lastName: activeUser.fullName?.split(" ")[1] || "",
-    email: activeUser.email || "",
-    username: activeUser.username || "",
+    firstName: currentUser.fullName?.split(" ")[0] || "",
+    lastName: currentUser.fullName?.split(" ")[1] || "",
+    email: currentUser.email || "",
+    username: currentUser.username || "",
+    prevImageUrl: currentUser.avatar || "",
   };
 
   return (
     <div className="p-8 gap-y-8 space-y-8">
       <ProfileHeader />
-      <ProfileImageSection userImage={activeUser.avatar} register={register} />
       <div className="w-2/3">
         <ProfileDetailsChangeForm
           register={register}
           handleSubmit={handleSubmit}
+          currentUser={currentUser}
           errors={errors}
-          watch={watch}
+          refetch={refetch}
           setValue={setValue}
           defaultValues={defaultValues}
         />

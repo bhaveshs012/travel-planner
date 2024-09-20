@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
-import { FaPersonCirclePlus, FaPencil } from "react-icons/fa6";
+import { FaPersonCirclePlus } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
 import { setTripPlan } from "../../../../features/tripPlanSlice";
 import apiClient from "../../../../api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { EditTripBudgetModal, InviteUserModal } from "../../../../components";
+import { InviteUserModal } from "../../../../components";
 import LoadingScreen from "../../../common/LoadingScreen";
 import ErrorScreen from "../../../common/ErrorScreen";
+import coverImage from "/assets/tripCoverImages/4.png";
 
 const HeroSection = React.forwardRef(({ props }, ref) => {
   const { tripId } = useParams();
@@ -50,7 +51,7 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
 
       <div className="h-auto w-full">
         <img
-          src="https://c4.wallpaperflare.com/wallpaper/299/901/190/beach-indian-ocean-sand-sandy-beach-wallpaper-preview.jpg"
+          src={coverImage}
           alt="Cover Image"
           className="w-full h-64 object-fill"
         />

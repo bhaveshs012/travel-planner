@@ -2,6 +2,7 @@ import React from "react";
 import { AvatarRow } from "../../../components";
 import { convertToINR } from "../../../utils/currencyFormatter";
 import { useNavigate } from "react-router-dom";
+import { getRandomCoverImage } from "../../../utils/getRandomCoverImage";
 
 function TripWiseExpenseCard({
   tripName,
@@ -25,7 +26,7 @@ function TripWiseExpenseCard({
     >
       <div className="w-1/2 p-4 rounded-tl-lg space-y-4 rounded-bl-lg">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Manali_City.jpg/1280px-Manali_City.jpg"
+          src={getRandomCoverImage()}
           alt="Trip Image"
           className="w-full h-100 object-cover rounded-lg"
         />

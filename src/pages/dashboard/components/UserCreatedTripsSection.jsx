@@ -2,6 +2,7 @@ import React from "react";
 import TripSummaryCard from "../../../components/TripSummaryCard/TripSummaryCard";
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { getRandomCoverImage } from "../../../utils/getRandomCoverImage";
 
 const UserCreatedTripsSection = ({ tripDetails }) => {
   const navigate = useNavigate();
@@ -22,11 +23,15 @@ const UserCreatedTripsSection = ({ tripDetails }) => {
         </button>
       </div>
       <div className="h-full overflow-x-auto scroll-m-2">
-        {tripDetails.length !== 0 ? (
+        {tripDetails && tripDetails.length !== 0 ? (
           <div className="flex space-x-4">
-            {tripDetails.map((tripDetail) => {
+            {tripDetails.map((tripDetail, index) => {
               return (
-                <TripSummaryCard key={tripDetail.tripId} {...tripDetail} />
+                <TripSummaryCard
+                  key={tripDetail.tripId}
+                  {...tripDetail}
+                  image={getRandomCoverImage()}
+                />
               );
             })}
           </div>
