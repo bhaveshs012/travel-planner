@@ -4,10 +4,9 @@ import { FaCalendarDays } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import tripIllustration from "/assets/trip-illustration.jpg";
 
 const TripSummaryCard = ({
-  // image,
+  image,
   tripName,
   tripId,
   placesToVisit,
@@ -26,7 +25,7 @@ const TripSummaryCard = ({
       className="flex flex-col flex-shrink-0 w-1/2 rounded-lg overflow-hidden shadow-lg bg-white space-y-4 gap-y-2 p-2 cursor-pointer"
       onClick={handleOnClick}
     >
-      <img className="w-full rounded-t" src={tripIllustration} alt="Trip" />
+      <img className="w-full rounded-t" src={image} alt="Trip" />
       <div>
         <div className="font-bold text-2xl overflow-auto">{tripName}</div>
         <p className="text-gray-700 text-base font-normal">{tripDesc}</p>

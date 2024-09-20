@@ -82,7 +82,7 @@ function TravelBookingCard({
       </div>
       <button className="px-4 py-2 bg-black text-white text-sm font-semibold rounded hover:bg-gray-900">
         <a href={bookingReceipt} target="_blank" rel="noopener noreferrer">
-          View PDF
+          View Booking
         </a>
       </button>
     </div>

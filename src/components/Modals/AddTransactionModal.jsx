@@ -155,7 +155,7 @@ const AddTransactionModal = forwardRef(({ tripId, refetch }, ref) => {
               error={errors.paymentDate?.message}
             />
           </div>
-          <MainComponent onClick={(e) => e.preventDefault()} />
+          <MainComponent tripId={tripId} onClick={(e) => e.preventDefault()} />
           <Button
             className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900 disabled:bg-slate-300"
             type="submit"

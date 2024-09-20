@@ -41,6 +41,10 @@ function Signup() {
     password,
     avatar,
   }) => {
+    if (!avatar) {
+      toast.error("Please upload a Profile Image !!");
+      return;
+    }
     try {
       setIsLoading(true);
       const fullName = firstName + " " + lastName;

@@ -35,15 +35,24 @@ function ExpenseTracker() {
       <div>
         <ExpenseTrackerGraphs />
       </div>
-      <div className="mt-12">
+      <div className="mt-20">
         <p className="text-xl font-bold my-4">
           Review Your Recent Trip Expenses
         </p>
         <div className="overflow-x-auto scroll-m-2">
           <div className="flex space-x-4">
-            {tripwiseExpenseData.map((expenseData, index) => (
-              <TripWiseExpenseCard key={index} {...expenseData} />
-            ))}
+            {tripwiseExpenseData && tripwiseExpenseData.length !== 0 ? (
+              tripwiseExpenseData.map((expenseData, index) => (
+                <TripWiseExpenseCard key={index} {...expenseData} />
+              ))
+            ) : (
+              <div className="w-full text-center p-4">
+                <p className="text-lg font-semibold">No expenses found</p>
+                <p className="text-md text-gray-400">
+                  Please add some expenses !! 😁
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

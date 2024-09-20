@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import SearchList from "./SearchList";
 import useDebounce from "../../hooks/useDebounce";
 
-const MainComponent = ({ tripId = "66c0fb22564716f8e4c55f9f" }) => {
+const MainComponent = ({ tripId }) => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 500);
 
