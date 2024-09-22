@@ -100,9 +100,17 @@ const AddBookingModal = forwardRef(({ tripId, refetch }, ref) => {
             {...register("bookingType")}
           />
           {watch("bookingType") === "Travel" ? (
-            <TravelBookingDetails register={register} errors={errors} />
+            <TravelBookingDetails
+              watch={watch}
+              register={register}
+              errors={errors}
+            />
           ) : (
-            <HotelBookingDetails register={register} errors={errors} />
+            <HotelBookingDetails
+              watch={watch}
+              register={register}
+              errors={errors}
+            />
           )}
           <Input
             label="Booking Receipt"

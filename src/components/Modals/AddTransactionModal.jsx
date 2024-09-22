@@ -10,6 +10,7 @@ import MainComponent from "../TripMemberSearchBar/MainComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import apiClient from "../../api/apiClient";
+import { useQueryClient } from "@tanstack/react-query";
 import { resetSplitBetween } from "../../features/splitBetweenSlice";
 
 const AddTransactionModal = forwardRef(({ tripId, refetch }, ref) => {
@@ -51,6 +52,7 @@ const AddTransactionModal = forwardRef(({ tripId, refetch }, ref) => {
       );
       toast.success("Transaction Added Successfully !!");
       refetch();
+      refetchOtherDetails();
       dispatch(resetSplitBetween());
       reset();
       dialogRef.current.close();
@@ -59,6 +61,15 @@ const AddTransactionModal = forwardRef(({ tripId, refetch }, ref) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  //* Refetching Other Details as well
+  const queryClient = useQueryClient();
+  const refetchOtherDetails = () => {
+    queryClient.refetchQueries(["amountContributedByEachUser"]);
+    queryClient.refetchQueries(["amountOwedToUser"]);
+    queryClient.refetchQueries(["amountOwedByUser"]);
+    queryClient.refetchQueries(["tripSummary"]);
   };
 
   if (isLoading) return <p>Loading ...</p>;
@@ -103,7 +114,7 @@ const AddTransactionModal = forwardRef(({ tripId, refetch }, ref) => {
           />
           <Input
             label="Paid To"
-            placeholder="Payment done to ..."
+            placeholder="e.g. (Restaurant, Travels, Shop Name)"
             className="my-4 w-full"
             {...register("paidTo", {
               required: "Payment Details are required",

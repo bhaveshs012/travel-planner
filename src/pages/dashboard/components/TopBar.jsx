@@ -1,13 +1,15 @@
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
-
-const TopBar = ({ userName = "Bhavesh" }) => {
-  const date = new Date();
+import { useSelector } from "react-redux";
+const TopBar = () => {
+  const fullName = useSelector((state) => state.auth.user.fullName);
   return (
     <div className="space-y-2">
       <div className="flex flex-row justify-between items-center">
         <div>
-          <div className="text-xl font-bold">Hello, {userName} !!</div>
+          <div className="text-xl font-bold">
+            Hello, {fullName.split(" ")[0]} !!
+          </div>
           <div className="text-lg text-gray-400">
             Review Your Trips and Stay and Budgets to avoid last minute mess ups
             !!

@@ -9,6 +9,7 @@ function SideBar({
   sideBarLinks,
   CTA,
   CTAFunction,
+  isCTADisabled,
   CTAIcon,
   tripId,
 }) {
@@ -51,6 +52,7 @@ function SideBar({
             <Button
               className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-gray-900"
               onClick={CTAFunction}
+              disabled={isCTADisabled}
             >
               {sideBarOpen ? CTA : CTAIcon}
             </Button>

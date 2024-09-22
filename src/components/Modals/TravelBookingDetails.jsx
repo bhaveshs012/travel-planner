@@ -1,8 +1,11 @@
 import React from "react";
 import { Input, Select } from "../Form";
+import { useSelector } from "react-redux";
 
 const TravelBookingDetails = ({ register, errors }) => {
-  //TODO: Convert the time to A.M. P.M. format before saving it to DB
+  const startDate = useSelector((state) => state.tripPlan.startDate);
+  const endDate = useSelector((state) => state.tripPlan.endDate);
+
   return (
     <div className="w-full">
       <Select

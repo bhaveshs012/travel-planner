@@ -42,7 +42,6 @@ function CreatePlanStarterPage() {
   //* Initial Load : Reset Trip Members while creating the trip
   useEffect(() => {
     dispatch(resetTripMembers());
-
     return () => {};
   }, []);
 
@@ -64,8 +63,12 @@ function CreatePlanStarterPage() {
     //* Async operation Hence we need to wait till it completes
 
     try {
+      console.log("Clicked !!");
+
       setIsLoading(true);
       const tripMembersIds = tripMembers.map((tripMember) => tripMember.userId);
+      console.log(tripMembersIds);
+
       const response = await apiClient.post("/tripPlan/createTripPlan", {
         tripName,
         tripDesc,
@@ -74,6 +77,7 @@ function CreatePlanStarterPage() {
         tripMembers: tripMembersIds,
         itinerary: itinerary,
       });
+      console.log(response);
 
       // Reset the form and handle navigation
       reset();
@@ -119,12 +123,20 @@ function CreatePlanStarterPage() {
             <Input
               label="Start Date"
               placeholder="Enter the Start Date !!"
+              min={new Date()}
               type={"date"}
               className="my-4 w-full"
               {...register("startDate", {
                 required: "Start Date is required",
                 validate: (value) => {
-                  if (value < new Date()) {
+                  const inputDate = new Date(value);
+                  const today = new Date();
+
+                  // Set time to midnight for both dates (so only date is compared)
+                  inputDate.setHours(0, 0, 0, 0);
+                  today.setHours(0, 0, 0, 0);
+
+                  if (inputDate <= today) {
                     return "Start Date should be greater than today !!";
                   }
                 },
@@ -139,9 +151,17 @@ function CreatePlanStarterPage() {
               {...register("endDate", {
                 required: "End Date is required",
                 validate: (value) => {
-                  if (value < new Date())
-                    return "End Date should be greater than today !!";
-                  if (value <= watch("startDate")) {
+                  const inputDate = new Date(value);
+                  const today = new Date();
+                  let startDate = watch("startDate");
+                  let formattedStartDate = new Date(startDate);
+
+                  // Set time to midnight for both dates (so only date is compared)
+                  inputDate.setHours(0, 0, 0, 0);
+                  today.setHours(0, 0, 0, 0);
+                  formattedStartDate.setHours(0, 0, 0, 0);
+
+                  if (inputDate < formattedStartDate) {
                     return "End Date should be greater than start date !!";
                   }
                 },

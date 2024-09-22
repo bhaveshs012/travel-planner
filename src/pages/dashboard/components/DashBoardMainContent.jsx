@@ -21,6 +21,7 @@ const DashBoardMainContent = () => {
   } = useQuery({
     queryKey: ["fetchDashboardTripSummary"],
     queryFn: fetchDashboardTripSummary,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <LoadingScreen />;
