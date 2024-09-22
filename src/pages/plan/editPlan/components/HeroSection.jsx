@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FaPersonCirclePlus } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
 import { setTripPlan } from "../../../../features/tripPlanSlice";
@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { InviteUserModal } from "../../../../components";
 import LoadingScreen from "../../../common/LoadingScreen";
 import ErrorScreen from "../../../common/ErrorScreen";
+import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 import coverImage from "/assets/tripCoverImages/4.png";
 
 const HeroSection = React.forwardRef(({ props }, ref) => {
@@ -35,12 +37,32 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["getTripDetailsById", tripId],
     queryFn: getTripDetailsById,
-    refetchOnWindowFocus: false, // Prevent refetch on window focus
-    refetchOnMount: false, // Prevent refetch when component mounts
-    refetchOnReconnect: false, // Prevent refetch when the network reconnects
-    cacheTime: Infinity, // Cache data indefinitely
-    staleTime: Infinity, // Treat data as fresh forever (no auto refetch)
   });
+
+  //* For Saving Users on Invite
+  const [isSaving, setIsSaving] = useState(false);
+  const queryClient = useQueryClient();
+  const handleInviteMembers = async () => {
+    try {
+      setIsSaving(true);
+      const tripMembersIds = tripPlan.tripMembers.map(
+        (tripMember) => tripMember.userId
+      );
+      const response = await apiClient.patch(`/tripPlan/${tripId}`, {
+        tripMembers: tripMembersIds,
+      });
+      // On save we refetch the trip Details
+      toast.success("Users Invited Successfully !!");
+      inviteUserModalRef.current.closeModal();
+      queryClient.refetchQueries(["getTripDetailsById", tripId]);
+    } catch (error) {
+      console.log(error);
+
+      toast.error("Some error occurred !!");
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen />;
@@ -51,6 +73,10 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
         ref={inviteUserModalRef}
         fromTripDashboard={true}
         tripId={tripId}
+        CTA={"Done"}
+        isCTADisabled={isSaving}
+        CTAFunction={handleInviteMembers}
+        extraInfo={true}
       />
 
       <div className="h-auto w-full">

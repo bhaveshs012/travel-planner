@@ -4,7 +4,7 @@ import UsersDisplay from "./UsersDisplay";
 import UserSearchBar from "./UserSearchBar";
 import UserSearchList from "./UserSearchList";
 
-const UserSearchMainComponent = () => {
+const UserSearchMainComponent = ({ extraInfo }) => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 500);
   return (
@@ -13,6 +13,18 @@ const UserSearchMainComponent = () => {
         <p className="text-md underline font-bold text-center">
           Invite Trip Members
         </p>
+        {extraInfo && (
+          <div className="flex space-x-6 justify-start bg-gray-50 rounded-md w-full shadow-sm p-4">
+            <div className="flex space-x-2 items-center">
+              <div className="bg-green-100 w-4 h-4 rounded-full"></div>
+              <p className="text-sm font-medium">Member</p>
+            </div>
+            <div className="flex space-x-2 items-center">
+              <div className="bg-gray-100 w-4 h-4 rounded-full"></div>
+              <p className="text-sm font-medium">Invited</p>
+            </div>
+          </div>
+        )}
         <UsersDisplay />
         <UserSearchBar
           searchValue={searchValue}

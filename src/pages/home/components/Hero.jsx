@@ -1,8 +1,10 @@
 import React from "react";
 import coreConstants from "../../../constants/core";
 import HeroImage from "/assets/hero-image.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+  const naviate = useNavigate();
   return (
     <>
       <div className="container mx-auto px-4 py-8 md:py-8 flex flex-col md:flex-row items-center justify-between">
@@ -14,12 +16,12 @@ function Hero() {
             {coreConstants.AppName} helps you organize your travel plans and
             share them with friends. Sign up now and start exploring!
           </p>
-          <a
-            href="/plan"
+          <button
+            onClick={() => naviate("/plan/create")}
             className="bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-900 transition duration-300"
           >
             Start Planning
-          </a>
+          </button>
         </div>
 
         <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center">

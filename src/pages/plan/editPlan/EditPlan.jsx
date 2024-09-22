@@ -11,6 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 function EditPlan() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -21,10 +22,10 @@ function EditPlan() {
 
   const handleSave = async () => {
     try {
+      setIsSaving(true);
       const tripMembersIds = tripPlan.tripMembers.map(
         (tripMember) => tripMember.userId
       );
-
       const response = await apiClient.patch(`/tripPlan/${tripId}`, {
         tripName: tripPlan.tripName,
         tripDesc: tripPlan.tripDesc,
@@ -36,10 +37,13 @@ function EditPlan() {
         tripMembers: tripMembersIds,
         plannedBudget: tripPlan.plannedBudget,
       });
+      // On save we refetch the trip Details
       queryClient.refetchQueries(["getTripDetailsById", tripId]);
       toast.success("Trip Plan Updated Successfully !!");
     } catch (error) {
       toast.error("Some error occurred !!");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -50,7 +54,8 @@ function EditPlan() {
         handleToggleSideBar={toggleSidebar}
         sideBarLinks={sideBarLinks}
         tripId={tripId}
-        CTA={"Save"}
+        CTA={isSaving ? "Please Wait.." : "Save"}
+        isCTADisabled={isSaving}
         CTAFunction={handleSave}
         CTAIcon={<FaSave />}
       />
