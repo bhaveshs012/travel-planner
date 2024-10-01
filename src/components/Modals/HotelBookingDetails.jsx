@@ -36,7 +36,7 @@ const HotelBookingDetails = ({ register, watch, errors }) => {
             tripStartDate.setHours(0, 0, 0, 0);
 
             return (
-              inputDate > tripStartDate ||
+              inputDate >= tripStartDate ||
               "Check In Date cannot be before the trip start date !!"
             );
           },
@@ -65,7 +65,7 @@ const HotelBookingDetails = ({ register, watch, errors }) => {
             }
 
             return (
-              inputDate < tripEndDate ||
+              inputDate <= tripEndDate ||
               "Check Out Date cannot be after the trip end date !!"
             );
           },

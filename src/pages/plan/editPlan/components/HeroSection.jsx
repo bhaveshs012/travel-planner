@@ -56,8 +56,6 @@ const HeroSection = React.forwardRef(({ props }, ref) => {
       inviteUserModalRef.current.closeModal();
       queryClient.refetchQueries(["getTripDetailsById", tripId]);
     } catch (error) {
-      console.log(error);
-
       toast.error("Some error occurred !!");
     } finally {
       setIsSaving(false);
