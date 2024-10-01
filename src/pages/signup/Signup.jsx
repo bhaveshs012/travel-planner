@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Input, Button, AvatarInput } from "../../components/Form";
-import { PageHeader } from "../../components";
+import { InfoBox, PageHeader } from "../../components";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { login, loginFailure } from "../../features/authSlice";
+import { loginFailure, resetFailure } from "../../features/authSlice";
 import apiClient from "../../api/apiClient";
 
 function Signup() {
@@ -24,12 +24,11 @@ function Signup() {
   const navigate = useNavigate();
 
   //* Toasts for Errors
-  let toastId = null;
+  const toastIdRef = useRef(null);
+
   useEffect(() => {
-    if (error) {
-      if (!toast.isActive(toastId)) {
-        toastId = toast.error(error);
-      }
+    if (error && !toast.isActive(toastIdRef.current)) {
+      toastIdRef.current = toast.error(error);
     }
   }, [error]);
 
@@ -56,14 +55,14 @@ function Signup() {
       formData.append("avatar", avatar);
 
       const response = await apiClient.post("/users/register", formData);
-
       toast.success(`${response.data.message}! Login to Continue`);
+      // reset the failure message to avoid additional toasts
+      dispatch(resetFailure());
       //redirect to login
       navigate("/login");
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message || "An error occurred";
-        toast.error(errorMessage); // Display the error message in a toast
         dispatch(loginFailure(errorMessage));
       }
     } finally {
@@ -75,10 +74,11 @@ function Signup() {
     <div className="min-h-screen w-screen flex items-center justify-center p-8">
       <div className="border border-black border-opacity-20 p-8 rounded-lg shadow-lg w-3/5">
         <PageHeader
-          className={"text-center"}
+          className={"text-center mb-4"}
           title="Welcome to Journey Sync"
           subtitle="Register to create your first account and start exploring !!"
         />
+        <InfoBox />
         <form className="my-5" onSubmit={handleSubmit(onSubmit)}>
           <AvatarInput register={register} />
           <div className="flex flex-row gap-x-8 w-full justify-center">

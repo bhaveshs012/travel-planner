@@ -21,6 +21,9 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.isAuthenticated = false; // Ensure this is set to false on failure
     },
+    resetFailure(state, action) {
+      state.error = null;
+    },
     setUser(state, action) {
       state.user = action.payload;
     },
@@ -32,5 +35,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, loginFailure, logout, setUser } = authSlice.actions;
+export const { login, loginFailure, logout, setUser, resetFailure } =
+  authSlice.actions;
 export default authSlice.reducer;

@@ -63,11 +63,8 @@ function CreatePlanStarterPage() {
     //* Async operation Hence we need to wait till it completes
 
     try {
-      console.log("Clicked !!");
-
       setIsLoading(true);
       const tripMembersIds = tripMembers.map((tripMember) => tripMember.userId);
-      console.log(tripMembersIds);
 
       const response = await apiClient.post("/tripPlan/createTripPlan", {
         tripName,
@@ -77,7 +74,6 @@ function CreatePlanStarterPage() {
         tripMembers: tripMembersIds,
         itinerary: itinerary,
       });
-      console.log(response);
 
       // Reset the form and handle navigation
       reset();

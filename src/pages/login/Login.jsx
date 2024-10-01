@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import apiClient from "../../api/apiClient";
 import Cookies from "js-cookie";
+import { InfoBox } from "../../components";
 
 const Login = () => {
   const {
@@ -55,7 +56,6 @@ const Login = () => {
       toast.success("User Logged In !!");
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred";
-      toast.error(errorMessage);
       dispatch(loginFailure(errorMessage));
     } finally {
       setIsLoading(false);
@@ -65,6 +65,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white max-w-md w-full p-8 rounded-lg shadow-lg">
+        <InfoBox fromLogin={true} />
         <h2 className="text-3xl font-bold text-center text-black mb-6">
           Login
         </h2>

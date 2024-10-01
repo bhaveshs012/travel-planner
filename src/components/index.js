@@ -10,6 +10,7 @@ import AddBookingModal from "./Modals/AddBookingModal";
 import AddTransactionModal from "./Modals/AddTransactionModal";
 import InviteUserModal from "./Modals/InviteUserModal";
 import EditTripBudgetModal from "./Modals/EditTripBudgetModal";
+import InfoBox from "./InfoBox";
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   AddTransactionModal,
   InviteUserModal,
   EditTripBudgetModal,
+  InfoBox,
 };
