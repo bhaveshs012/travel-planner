@@ -11,6 +11,7 @@ const UpcomingTripSection = ({ tripDetails }) => {
       <div>
         {tripDetails && tripDetails.length !== 0 ? (
           <UpcomingTripSummaryCard
+            key={1}
             image={tripIllustraion}
             tripId={tripDetails.tripId}
             amount={tripDetails.plannedBudget}
