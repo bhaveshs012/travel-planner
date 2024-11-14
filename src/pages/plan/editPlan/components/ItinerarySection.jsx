@@ -40,7 +40,7 @@ const ItinerarySection = React.forwardRef(({ props }, ref) => {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col gap-y-4 w-full">
         {itineraryList.map((itineraryItem, index) => {
           return (
             <ItineraryListItem

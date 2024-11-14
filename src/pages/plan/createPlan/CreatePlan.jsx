@@ -37,7 +37,6 @@ function CreatePlanStarterPage() {
   //* Redux ::
   const dispatch = useDispatch();
   const tripMembers = useSelector((state) => state.tripPlan.tripMembers);
-  const itinerary = useSelector((state) => state.tripPlan.itinerary);
 
   //* Initial Load : Reset Trip Members while creating the trip
   useEffect(() => {
@@ -72,7 +71,6 @@ function CreatePlanStarterPage() {
         startDate,
         endDate,
         tripMembers: tripMembersIds,
-        itinerary: itinerary,
       });
 
       // Reset the form and handle navigation
