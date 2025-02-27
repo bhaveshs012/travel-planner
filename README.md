@@ -3,6 +3,8 @@
 ## Overview
 Journey Sync is an all-in-one travel planning application designed to streamline the process of organizing trips. It enables live collaboration among trip mates, allowing them to plan every detail of their journey together. From creating itineraries to tracking expenses, Journey Sync offers a suite of features to ensure a seamless and enjoyable travel experience.
 
+[Try it Here !!](https://journey-sync.vercel.app/)
+
 ## Features
 
 ### Live Collaboration
